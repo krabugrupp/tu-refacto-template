@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.2'
 	id 'io.spring.dependency-management' version '1.1.4'
-	id 'org.openapi.generator' version '5.3.1'
+//	id 'org.openapi.generator' version '5.3.1'
 }
 springBoot {
 	mainClass = 'com.tu.app.TuAppApplication'
@@ -31,9 +31,8 @@ dependencies {
 
 
 
-	//Swagger 3 springfox
-	implementation 'io.springfox:springfox-boot-starter:3.0.0'
-	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	//Swagger 3  not springfox
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 
 	implementation 'javax.xml.bind:jaxb-api:2.3.1'
 
@@ -41,15 +40,17 @@ dependencies {
 	implementation ('org.openapitools:openapi-generator:7.3.0') {
 		exclude group: 'org.slf4j', module: 'slf4j-simple'
 	}
-	// Open api
-	implementation 'javax.validation:validation-api:2.0.1.Final'
-	implementation 'javax.servlet:javax.servlet-api:3.0.1'
-	implementation 'javax.annotation:javax.annotation-api:1.3.2'
-	implementation 'org.openapitools:jackson-databind-nullable:0.2.1'
 
-	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+//	// Open api
+//	implementation 'javax.validation:validation-api:2.0.1.Final'
+//	implementation 'javax.servlet:javax.servlet-api:3.0.1'
+//	implementation 'javax.annotation:javax.annotation-api:1.3.2'
+//	implementation 'org.openapitools:jackson-databind-nullable:0.2.1'
+//	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
 
+	// Docker database on startup
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 	runtimeOnly 'org.postgresql:postgresql'
 
@@ -59,20 +60,20 @@ dependencies {
 
 }
 
-openApiGenerate {
-	generatorName = "spring"
-	inputSpec = "${projectDir}/src/main/resources/spec/test-api.yml"
-	outputDir = "${buildDir}/generated"
-	modelNameSuffix = "Dto"
-
-	configOptions = [
-			basePackage: "com.tu.app",
-			apiPackage: "com.tu.app.api",
-			generateApiDocumentation: "false",
-			withInterfaces: "true",
-			dateLibrary: "java8"
-	]
-}
+//openApiGenerate {
+//	generatorName = "spring"
+//	inputSpec = "${projectDir}/src/main/resources/spec/test-api.yml"
+//	outputDir = "${buildDir}/generated"
+//	modelNameSuffix = "Dto"
+//
+//	configOptions = [
+//			basePackage: "com.tu.app",
+//			apiPackage: "com.tu.app.api",
+//			generateApiDocumentation: "false",
+//			withInterfaces: "true",
+//			dateLibrary: "java8"
+//	]
+//}
 sourceSets {
 	client {
 		java {
