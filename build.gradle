@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.2'
 	id 'io.spring.dependency-management' version '1.1.4'
-	id 'org.openapi.generator' version '5.3.1'
+	id 'org.openapi.generator' version '6.6.0'
 }
 springBoot {
 	mainClass = 'com.tu.app.TuAppApplication'
@@ -76,7 +76,11 @@ openApiGenerate {
 			apiPackage: "com.tu.app.api",
 			generateApiDocumentation: "false",
 			withInterfaces: "true",
-			dateLibrary: "java8"
+			dateLibrary: "java8",
+			delegatePattern: "true",
+			sourceFolder: "src/main/java",
+			library : "spring-boot",
+
 	]
 }
 sourceSets {
