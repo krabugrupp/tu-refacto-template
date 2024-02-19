@@ -1,0 +1,29 @@
+openapi: "3.0.3"
+info:
+  title: inventory-api
+  version: 1.0.0
+paths:
+  /test:
+    get:
+      summary: Test open api
+      responses:
+        '200':
+          description: Test OpenApi
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestObject'
+
+components:
+  schemas:
+    TestObject:
+      type: object
+      properties:
+        id:
+          type: string
+          format: UUID
+    Error:
+      type: object
+      properties:
+        message:
+          type: string

@@ -1,0 +1,63 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.2'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.openapi.generator' version '7.3.0'
+}
+
+group = 'com.tu.app'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-graphql'
+	implementation 'org.liquibase:liquibase-core'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
+	// Exclude SLF4J to prevent multiple binding errors
+	implementation ('org.openapitools:openapi-generator:7.3.0') {
+		exclude group: 'org.slf4j', module: 'slf4j-simple'
+	}
+	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework:spring-webflux'
+	testImplementation 'org.springframework.graphql:spring-graphql-test'
+}
+
+openApiGenerate {
+	generatorName = "jaxrs-cxf"
+	inputSpec = "${projectDir}/src/main/resources/spec/test-api.yml"
+	outputDir = "${buildDir}/generated/openapi"
+	modelNameSuffix = "Dto"
+	configOptions = [
+			basePackage: "com.tu.app",
+			modelPackage: "com.tu.app.model",
+			apiPackage: "com.tu.app.api",
+			configPackage: "com.tu.app.config"
+	]
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+// Make openApiGenerate a dependency of the build task
+
+build.finalizedBy(tasks.openApiGenerate)

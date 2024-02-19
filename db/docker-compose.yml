@@ -1,0 +1,19 @@
+version: '3.4'
+
+volumes:
+  books-database:
+    name: books-database
+
+services:
+  books-postgres:
+    container_name: books-postgres
+    image: postgres:12
+    restart: always
+    ports:
+      - 3999:5432
+    volumes:
+      - books-database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: books
+      POSTGRES_PASSWORD: books
+
