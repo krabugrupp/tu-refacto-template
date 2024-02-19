@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.graphql.data.GraphQlRepository;
 
 @OpenAPIDefinition(info = @Info(title = "My API", version = "1.0", description = "API for something"))
 @SpringBootApplication
