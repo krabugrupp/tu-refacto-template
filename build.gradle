@@ -26,12 +26,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 
-	implementation 'org.springframework.boot:spring-boot-starter-graphql'
 	implementation 'org.liquibase:liquibase-core'
 
 
 
-	// Todo error on :test if swagger is enabled
 	//Swagger 3  not springfox
 	// exclude swagger annotation and use newer version due conflicts with avro serializer
 	implementation ('org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0') {
@@ -52,6 +50,9 @@ dependencies {
 	implementation 'javax.annotation:javax.annotation-api:1.3.2'
 	implementation 'org.openapitools:jackson-databind-nullable:0.2.1'
 	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+
+	// Graphql
+	implementation 'org.springframework.boot:spring-boot-starter-graphql'
 
 	// Docker database on startup
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
