@@ -1,4 +1,4 @@
-package com.tu.app.rest;
+package com.tu.app.web.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/")
 public class TestResource {
     private static final Logger log = LoggerFactory.getLogger(TestResource.class);
 

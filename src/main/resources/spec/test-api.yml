@@ -1,18 +1,34 @@
 openapi: "3.0.3"
 info:
-  title: inventory-api
+  title: test-api
   version: 1.0.0
+servers:
+  - url: http://localhost:8080
 paths:
   /test:
     get:
       summary: Test open api
+      operationId: getTest
       responses:
         '200':
           description: Test OpenApi
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TestObject'
+                type: string
+              example: "test is successful"
+  /privet:
+    get:
+      summary: Вернуть приветствие
+      operationId: getPrivet
+      responses:
+        '200':
+          description: Приветствие
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: "привет"
 
 components:
   schemas:
