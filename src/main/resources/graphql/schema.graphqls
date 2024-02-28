@@ -1,0 +1,22 @@
+type Query {
+    person: Person
+}
+
+
+type Person {
+    id: Int!
+    name: String
+    forename: String
+    fatherName: String
+    registryCode: String
+    maksuametCode: String
+    birthDate: String
+    sex: Int
+    someAlus: String
+    url: String
+    kid: Int
+    updatedAt: String
+    citizenship: Int
+    uuid: String
+    emplid: String
+}

@@ -1,9 +1,12 @@
 plugins {
 	id 'java'
+	id 'idea'
 	id 'org.springframework.boot' version '3.2.2'
 	id 'io.spring.dependency-management' version '1.1.4'
 	id 'org.openapi.generator' version '6.6.0'
+
 }
+
 springBoot {
 	mainClass = 'com.tu.app.TuAppApplication'
 }
@@ -66,26 +69,28 @@ dependencies {
 
 }
 
+// Todo "/generated/src/main/java/com/tu/app/OpenApiGeneratorApplication.java" из-за этого файла не работают ендпоинты
 openApiGenerate {
 	generatorName = "spring"
 	inputSpec = "${projectDir}/src/main/resources/spec/test-api.yml"
+	apiPackage = "com.tu.app.api"
+	modelPackage = "com.tu.app.api.model"
 	outputDir = "${buildDir}/generated"
-	modelNameSuffix = "Dto"
-
+	skipValidateSpec = false
+	generateApiDocumentation = false
 	configOptions = [
+			title: "tu",
 			basePackage: "com.tu.app",
-			apiPackage: "com.tu.app.api",
-			generateApiDocumentation: "false",
-			withInterfaces: "true",
 			dateLibrary: "java8",
-			delegatePattern: "true",
 			sourceFolder: "src/main/java",
-			library : "spring-boot",
+			library: "spring-boot",
+			delegatePattern: "true",
+
 
 	]
 }
 sourceSets {
-	client {
+	main {
 		java {
 			srcDir "${buildDir}/generated/src/main/java"
 		}
@@ -93,12 +98,16 @@ sourceSets {
 }
 
 compileJava {
-	source += sourceSets.client.java
+	source += sourceSets.main.java
 
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
-// Make openApiGenerate a dependency of the build task
-build.finalizedBy(tasks.openApiGenerate)
+
+
+//  4to bi udaljat spring boot app который создается и мешает
+tasks.openApiGenerate.doLast {
+	delete "${buildDir}/generated/src/main/java/com/tu/app/OpenApiGeneratorApplication.java"
+}
