@@ -190,7 +190,7 @@ components:
           type: string
           maxLength: 100
           description: Isiku eesnimi
-        forename:
+        lastName:
           type: string
           maxLength: 100
           description: Isiku perekonnanimi

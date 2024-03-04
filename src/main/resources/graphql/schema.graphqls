@@ -6,7 +6,7 @@ type Query {
 type Person {
     id: Int!
     name: String
-    forename: String
+    lastName: String
     fatherName: String
     registryCode: String
     maksuametCode: String

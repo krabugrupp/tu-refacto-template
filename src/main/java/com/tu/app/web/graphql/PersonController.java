@@ -22,7 +22,7 @@ public class PersonController {
         Person person = new Person();
         person.setId(1);
         person.setName("Peeter");
-        person.setForename("Peetrovi4");
+        person.setLastName("Peetrovi4");
         person.setFatherName("Peetrov");
         person.setRegistryCode("39923131113");
         person.setMaksuametCode("7890");
