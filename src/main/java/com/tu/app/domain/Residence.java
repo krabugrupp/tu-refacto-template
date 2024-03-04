@@ -14,7 +14,7 @@ public class Residence {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "ID_ELUKOHT")
+    @Column(name = "IR_ELUKOHT")
     public int id;
 
     // Kui täidetud, siis on tegemist isiku aadressiga
