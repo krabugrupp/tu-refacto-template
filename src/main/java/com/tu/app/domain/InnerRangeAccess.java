@@ -21,11 +21,11 @@ public class InnerRangeAccess {
 
 
     // Basic auth parool
-    @Column(name = " PASSWORD", length = 20)
+    @Column(name = "PASSWORD", length = 20)
     public  String password;
 
     //API key
-    @Column(name = " API_KEY", length = 30)
+    @Column(name = "API_KEY", length = 30)
     public  String apiKey;
 
 }
