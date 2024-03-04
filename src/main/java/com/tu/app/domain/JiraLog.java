@@ -1,7 +1,6 @@
 package com.tu.app.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -23,8 +22,5 @@ public class JiraLog {
     // TODO SOME CLOB
     @Column(name = "LOGI")
     public String logs;
-
-
-
 
 }

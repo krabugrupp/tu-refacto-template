@@ -3,7 +3,6 @@ package com.tu.app.domain;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
 import java.util.Date;
 
 @Entity

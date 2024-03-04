@@ -36,7 +36,7 @@ public class ETIS2Category {
     @Column(name = "ALGUS_KP")
     private Date dateFrom;
 
-    //ETISesse saadetud ir_kategooria.lopp_kp väärtus
+    // ETISesse saadetud ir_kategooria.lopp_kp väärtus
     @Column(name = "LOPP_KP")
     private Date dateTo;
 

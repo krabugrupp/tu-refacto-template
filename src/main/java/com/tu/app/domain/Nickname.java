@@ -2,9 +2,6 @@ package com.tu.app.domain;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import org.checkerframework.checker.units.qual.C;
-
-import java.util.Date;
 
 @Entity
 @Table(name = "IR_ETIS2_UUENDADA")
