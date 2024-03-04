@@ -1,0 +1,251 @@
+openapi: 3.0.3
+info:
+  title: TU Person API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080/api/persion
+
+tags:
+  - name: person
+
+paths:
+
+  /:
+    get:
+      tags:
+        - person
+      summary: Person test
+      operationId: getPerson
+      responses:
+        '200':
+          description: Приветствие
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+
+  /citizenship:
+    get:
+      tags:
+        - person
+      summary: Person citizenship test
+      operationId: getCitizenship
+      responses:
+        '200':
+          description: Приветствие
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonCitizenship'
+
+
+
+components:
+  schemas:
+    PersonCitizenship:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: Tabeli primaarvõti
+          nullable: false
+        personId:
+          type: integer
+          description: Millise isiku isikukoodiga on tegemist
+          nullable: false
+        countryCode:
+          type: string
+          maxLength: 100
+          description: Välisriigi isikukood
+        residencePermitFrom:
+          type: string
+          format: date
+          description: Ei kasutata
+        residencePermitTo:
+          type: string
+          format: date
+          description: Ei kasutata
+        residencePermitDoc:
+          type: string
+          maxLength: 30
+          description: Ei kasutata
+        dateFrom:
+          type: string
+          format: date
+          description: Rea kehtivuse alguse kuupäev
+        dateTo:
+          type: string
+          format: date
+          description: Rea kehtivuse lõppkuupäev
+        url:
+          type: string
+          maxLength: 50
+          description: Rea viimase muutmise teinud arvuti IP aadress. Kui muutus tehti baasist, siis ip ja kasutajatunnus
+        updatedById:
+            type: integer
+            description: Rea viimase muutja ID_ISIK. Täidetakse logitrigeri poolt
+        updatedAt:
+          type: string
+          format: date
+          description: Rea viimase muutmise aeg. Täidetakse logitrigeri poolt
+        countryId:
+          type: integer
+          description: Mis riigi isikukoodiga tegemist on
+          nullable: false
+
+    PersonWorkContract:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: Tabeli primaarvõti
+          nullable: false
+        contractCategory:
+          type: integer
+          description: Töölepingu tüüp klassifikaatorist 103
+        contractSubcategory:
+          type: integer
+          description: Ametinimetus, klassifikaator 104 NB! FO enam ei täida, ametinimetus tuleks võtta ametinimetus_ek/ametinimetus_ik väljalt
+        personId:
+          type: integer
+          description: Mis isiku reaga on tegemist
+          nullable: false
+        personStructurId:
+          type: integer
+          description: Viide struktuuriüksusele, kus isik töötab
+          nullable: false
+        startedAt:
+          type: string
+          format: date
+          description: Rea alguskuupäev
+          nullable: false
+        endedAt:
+          type: string
+          format: date
+          description: Rea lõppkuupäev
+        url:
+          type: string
+          maxLength: 50
+          description: Rea viimase muutmise teinud arvuti IP aadress. Kui muutus tehti baasist, siis ip ja kasutajatunnus
+        kid:
+          type: integer
+          description: Rea viimase muutja ID_ISIK. Täidetakse logitrigeri poolt
+        updatedAt:
+          type: string
+          format: date-time
+          description: Rea viimase muutmise aeg. Täidetakse logitrigeri poolt
+        workContractId:
+          type: integer
+          description: Viide töölepingule, mille alla see rida kuulub
+        taskCategoryId:
+          type: integer
+          description: Tööülesande tüüp klassifikaatorist 290
+        speciality:
+          type: string
+          maxLength: 80
+          description: Eriala vaba tekstina
+        workLoad:
+          type: integer
+          description: Koormus antud real
+        sortNmbr:
+          type: integer
+          description: Lepingu rea järjestus veebi näitamiseks
+        workPhone:
+          type: string
+          maxLength: 20
+          description: Töökoha telefon, tuleb AXAPTAst
+        workPlace:
+          type: string
+          maxLength: 40
+          description: Töökoha kirjeldus AXAPTAst
+        comment:
+          type: string
+          maxLength: 500
+          description: Märkus AXAPTAst veebi kuvamiseks
+        klStatus:
+          type: integer
+          description: Töölepingu rea staatus otse axaptast. Klassifikaator 321
+        axaptaJoblevelId:
+          type: string
+          maxLength: 10
+          description: AXAPTA JoblevelID väärtus. Siin on kirjas, mis taseme töötajaga on tegemist (juht, dekaan, ...)
+        axaptaOfficeName:
+          type: string
+          maxLength: 200
+          description: Ametinimetus Axaptast inglise keeles
+        foContractId:
+          type: string
+          maxLength: 10
+          description: FO töölepingu rea id
+        officeNameEt:
+          type: string
+          maxLength: 200
+          description: Ametinimetus eesti keeles FO-st
+        foCommentEN:
+          type: string
+          maxLength: 500
+          description: Ingliskeelne märkus FOst veebi kuvamiseks
+
+    Person:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Tabeli primaarvõti
+          nullable: false
+        name:
+          type: string
+          maxLength: 100
+          description: Isiku eesnimi
+        lastName:
+          type: string
+          maxLength: 100
+          description: Isiku perekonnanimi
+        fatherName:
+          type: string
+          maxLength: 100
+          description: Isiku isanimi, enam ei kasutata
+        registryCode:
+          type: string
+          maxLength: 20
+          description: Eesti isikukood, unikaalne
+        maksuametCode:
+          type: string
+          maxLength: 20
+          description: Maksuameti kood. Eriti ei kasutata
+        birthDate:
+          type: string
+          format: date
+          description: Isiku sünniaeg
+        sex:
+          type: integer
+          description: Isiku sugu IR klassifikaatorist 101 (1=mees, 2=naine, 3=?)
+        someAlus:
+          type: string
+          maxLength: 1000
+          description: Isikuandmete muutmise alus (nt AXAPTA, VV)
+        url:
+          type: string
+          maxLength: 50
+          description: Rea viimase muutmise teinud arvuti IP aadress. Kui muutus tehti baasist, siis ip ja kasutajatunnus
+        kid:
+          type: integer
+          description: Rea viimase muutja ID_ISIK. Täidetakse logitrigeri poolt
+        updatedAt:
+          type: string
+          format: date
+          description: Rea viimase muutmise aeg. Täidetakse logitrigeri poolt
+        citizenship:
+          type: integer
+          description: Kodakondsuse id_maad
+        uuid:
+          type: string
+          maxLength: 40
+          description: Isiku unikaalne ja avalik UUID [ÕIS2]
+        emplid:
+          type: string
+          maxLength: 20
+          description: FO isiku id, muudetakse ainult fo-ir liidese kaudu

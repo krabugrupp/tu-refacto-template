@@ -1,19 +1,20 @@
 version: '3.4'
 
 volumes:
-  books-database:
-    name: books-database
+  tuapp-database:
+    name: tuapp-database
 
 services:
   books-postgres:
-    container_name: books-postgres
+    container_name: tuapp-postgres
     image: postgres:12
     restart: always
     ports:
-      - 3999:5432
+      - 5432:5432
     volumes:
-      - books-database:/var/lib/postgresql/data
+      - tuapp-database:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: books
-      POSTGRES_PASSWORD: books
+      POSTGRES_USER: tu_user
+      POSTGRES_PASSWORD: tuapp
+      POSTGRES_DB: tu_db
 
