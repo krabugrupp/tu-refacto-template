@@ -22,7 +22,7 @@ public class EmploymentContract {
     public Date signingDate;
 
     // Töölepingu number
-    @Column(name = "TOOLEPINGU_NR")
+    @Column(name = "TOOLEPINGU_NR", length = 20)
     public String contractNmbr;
 
     // Töölepingu alguskuupäev
@@ -34,7 +34,7 @@ public class EmploymentContract {
     public Date endDate;
 
     // FO töölepingu id
-    @Column(name = "CONTRACTID")
+    @Column(name = "CONTRACTID", length = 10)
     public String FOContractId;
 
     // Lepingu staatus

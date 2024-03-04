@@ -16,15 +16,15 @@ public class Vacation {
     public int id;
     
     // Millise töölepingu küljes antud puhkus on TODO VIIDE
-    @Column(name = "ID_TOOLEPING")
+    @Column(name = "ID_TOOLEPING", nullable = false)
     public int employmentContractId;
     
     // Mis aasta puhkusega on tegemist
-    @Column(name = "AASTA")
+    @Column(name = "AASTA", nullable = false)
     public int vacationYear;
     
     // Puhkuse liik (klassifikaator id_liik 323)
-    @Column(name = "KL_PUHKUSE_LIIK")
+    @Column(name = "KL_PUHKUSE_LIIK", nullable = false)
     public int vacationType;
     
     // Antud aastas normpäevade arv

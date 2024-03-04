@@ -62,11 +62,11 @@ public class Residence {
 
     // Rea viimase muutmise teinud arvuti IP aadress. Kui muutus tehti baasist, siis ip ja kasutajatunnus
     @Column(name = "URL")
-    public int updatedByUrl;
+    public String updatedByUrl;
 
     // Rea viimase muutja ID_ISIK. Täidetakse logitrigeri poolt
     @Column(name = "KID")
-    public Date updatedBy;
+    public int updatedBy;
 
     // Rea viimase muutmise aeg. Täidetakse logitrigeri poolt
     @Column(name = "AEG")
