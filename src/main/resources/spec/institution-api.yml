@@ -10,6 +10,19 @@ tags:
   - name: institution
 
 paths:
+  /:
+    get:
+      tags:
+        - degree
+      summary: Degree test
+      operationId: getDegree
+      responses:
+        '200':
+          description: Приветствие
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Degree'
 
 components:
   schemas:

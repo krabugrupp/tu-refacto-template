@@ -9,6 +9,19 @@ tags:
     - name: util
 
 paths:
+  /:
+    get:
+      tags:
+        - classificator
+      summary: Classificator test
+      operationId: getClassificator
+      responses:
+        '200':
+          description: Приветствие
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Classificator'
 components:
   schemas:
     Address:
