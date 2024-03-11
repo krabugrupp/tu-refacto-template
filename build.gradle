@@ -164,6 +164,7 @@ tasks.named('test') {
 }
 
 
+compileJava.dependsOn clean
 compileJava.dependsOn generatePersonApi
 compileJava.dependsOn generateInstitutionApi
 compileJava.dependsOn generateUtilApi

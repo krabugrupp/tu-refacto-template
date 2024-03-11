@@ -63,16 +63,35 @@ components:
       properties:
         devices:
           type: array
+          items:
+            $ref: '#/components/schemas/ContactDevice'
         addresses:
           type: array
+          items:
+            $ref: '#/components/schemas/Translations'
+
+    ContactDevice:
+      type: object
+      properties:
+        type:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        value:
+          type: string
+        lastModified:
+          type: string
+          format: date-time
 
     ContactInfoUpdateRequest:
       type: object
       properties:
         devices:
           type: array
+          items:
+            $ref: '#/components/schemas/ContactDevice'
         addresses:
           type: array
+          items:
+            $ref: '#/components/schemas/Address'
 
     Country:
       type: object

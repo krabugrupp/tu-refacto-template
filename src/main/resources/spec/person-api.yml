@@ -25,23 +25,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Person'
 
-  /citizenship:
-    get:
-      tags:
-        - person
-      summary: Person citizenship test
-      operationId: getCitizenship
-      responses:
-        '200':
-          description: Приветствие
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PersonCitizenship'
-
-
 
 components:
   schemas:
@@ -125,59 +108,11 @@ components:
           type: string
         units:
           type: array
+          items:
+            $ref: '#/components/schemas/PersonUnitJob'
         uuid:
           type: string
 
-    PersonCitizenship:
-      type: object
-      properties:
-        Id:
-          type: integer
-          description: Tabeli primaarvõti
-          nullable: false
-        countryCode:
-          type: string
-          maxLength: 100
-          description: Välisriigi isikukood
-        countryId:
-          type: integer
-          description: Mis riigi isikukoodiga tegemist on
-          nullable: false
-        dateFrom:
-          type: string
-          format: date
-          description: Rea kehtivuse alguse kuupäev
-        dateTo:
-          type: string
-          format: date
-          description: Rea kehtivuse lõppkuupäev
-        id:
-          type: integer
-          description: Millise isiku isikukoodiga on tegemist
-          nullable: false
-        residencePermitDoc:
-          type: string
-          maxLength: 30
-          description: Ei kasutata
-        residencePermitFrom:
-          type: string
-          format: date
-          description: Ei kasutata
-        residencePermitTo:
-          type: string
-          format: date
-          description: Ei kasutata
-        updatedById:
-          type: integer
-          description: Rea viimase muutja ID_ISIK. Täidetakse logitrigeri poolt
-        updatedAt:
-          type: string
-          format: date
-          description: Rea viimase muutmise aeg. Täidetakse logitrigeri poolt
-        url:
-          type: string
-          maxLength: 50
-          description: Rea viimase muutmise teinud arvuti IP aadress. Kui muutus tehti baasist, siis ip ja kasutajatunnus
 
     PersonDetails:
       type: object
@@ -219,6 +154,8 @@ components:
           minimum: 1
         structuralUnits:
           type: array
+          items:
+            $ref: 'util-api.yml#/components/schemas/StructuralUnit'
         studyLevel:
           $ref: 'util-api.yml#/components/schemas/Classificator'
         studyType:
@@ -229,6 +166,8 @@ components:
           maximum: 300
         uuids:
           type: array
+          items:
+            type: string
 
     PersonUnitJob:
       type: object
@@ -247,8 +186,12 @@ components:
       properties:
         accounts:
           type: array
+          items:
+            $ref: '#/components/schemas/UserAccountPeriod'
         emailAddresses:
           type: array
+          items:
+            type: string
         lastPasswordChange:
           type: string
           format: date-time
