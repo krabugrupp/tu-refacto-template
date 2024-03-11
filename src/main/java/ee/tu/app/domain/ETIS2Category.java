@@ -3,7 +3,7 @@ package ee.tu.app.domain;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import java.util.Date;
-
+// todo whats todo here
 @Entity
 @Table(name = "IR_ETIS2_KATEGOORIA")
 @NoArgsConstructor

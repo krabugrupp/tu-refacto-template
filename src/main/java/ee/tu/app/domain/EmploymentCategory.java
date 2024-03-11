@@ -3,7 +3,9 @@ package ee.tu.app.domain;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "IR_KATEGOORIA")
@@ -24,12 +26,14 @@ public class EmploymentCategory {
     public int subClassId;
 
     // Mis isiku reaga on tegemist // todo viide?
-    @Column(name = "ID_ISIK", nullable = false)
-    public int personId;
+    @JoinColumn(name = "ID_ISIK", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public Person person;
 
     // Viide struktuuriüksusele, kus isik töötab todo
-    @Column(name = "ID_STRUKTUUR", nullable = false)
-    public int structureId;
+    @JoinColumn(name = "ID_STRUKTUUR", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public Structure structure;
 
     // Rea alguskuupäev
     @Column(name = "ALGUS", nullable = false)
@@ -52,8 +56,9 @@ public class EmploymentCategory {
     public Date updatedAt;
     
     // Viide töölepingule, mille alla see rida kuulub
-    @Column(name = "ID_TOOLEPING")
-    public int employmentId;
+    @JoinColumn(name = "ID_TOOLEPING")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public EmploymentContract employmentContract;
 
     // Tööülesande tüüp klassifikaatorist 290
     @Column(name = "KL_YLESANDE_TYYP")
@@ -106,5 +111,6 @@ public class EmploymentCategory {
     // Ingliskeelne märkus FOst veebi kuvamiseks
     @Column(name = "MARKUS_IK", length = 500)
     public String noteEN;
-
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employmentCategory")
+    private List<SalaryData> salaryDataList = new ArrayList<>();
 }

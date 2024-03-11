@@ -23,8 +23,9 @@ public class PersonAttribute {
     public int id;
 
     // Millise isiku kohta käib tunnus
-    @Column(name = "ID_ISIK")
-    public int personId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_ISIK")
+    public Person person;
 
     /*
     Mis tunnusega täpselt tegu :

@@ -17,8 +17,9 @@ public class ForeignCitizenship {
     public int identityId;
 
     // Millise isiku isikukoodiga on tegemist
-    @Column(name = "ID_ISIK", nullable = false)
-    public int personId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_ISIK", nullable = false)
+    public Person person;
 
     // Välisriigi isikukood
     @Column(name = "VISIKUKOOD", length = 100)
@@ -57,7 +58,8 @@ public class ForeignCitizenship {
     public Date updatedAt;
 
     //Mis riigi isikukoodiga tegemist on
-    @Column(name = "ID_MAAD", nullable = false)
-    public int countryId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_MAAD", nullable = false)
+    public Country country;
 
 }

@@ -1,7 +1,10 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "IR_MAAD")
@@ -52,4 +55,13 @@ public class Country {
     // Rea viimase muutmise aeg. Täidetakse logitrigeri poolt
     @Column(name = "AEG")
     public Date updatedAt;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "country")
+    private List<ResidenceCode> residenceCodeList = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "countryCitizenship")
+//    private List<Person> personList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "country")
+    private List<ForeignCitizenship> foreignCitizenshipList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "country")
+    private List<Residence> residenceList = new ArrayList<>();
 }

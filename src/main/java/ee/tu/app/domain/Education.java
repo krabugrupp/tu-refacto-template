@@ -3,7 +3,9 @@ package ee.tu.app.domain;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "IR_HARIDUS")
@@ -17,12 +19,14 @@ public class Education {
     public int id;
 
     // Mis isiku haridusega on tegemist
-    @Column(name = "ID_ISIK", nullable = false)
-    public int personId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_ISIK", nullable = false)
+    public Person person;
 
     // Mis asutusest on haridus saadud
-    @Column(name = "ID_ASUTUS")
-    public int institutionId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_ASUTUS")
+    public Institution institution;
 
     // IR klassifikaator 250: alg, kesk, korg
     @Column(name = "KL_LIIK")
@@ -80,4 +84,6 @@ public class Education {
     @Column(name = "EDUCATIONCENTERID", length = 15)
     public String foEducationCenterId;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "education")
+    private List<Degree> degreeList = new ArrayList<>();
 }

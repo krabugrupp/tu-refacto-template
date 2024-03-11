@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-
+// todo whats todo here
 @Entity
 @Table(name = "IR_ETIS2_UUENDADA")
 @NoArgsConstructor

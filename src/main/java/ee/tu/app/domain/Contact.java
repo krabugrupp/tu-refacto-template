@@ -6,7 +6,9 @@ import java.util.Date;
 
 // Isikute kontaktivahendid
 @Entity
-@Table(name = "IR_KONTAKTIVAHENDID")
+@Table(name = "IR_KONTAKTIVAHENDID",
+        // todo Так ставить название праймери ки?
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"ID_KONTAKTIVAHEND"}, name = "PK_KONTAKTIVAHENDID")})
 public class Contact {
 
 
@@ -17,8 +19,9 @@ public class Contact {
     public int id;
 
     // Millise isiku isikukoodiga on tegemist
-    @Column(name = "ID_ISIK", nullable = false)
-    public int personId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_ISIK", nullable = false)
+    public Person person;
 
     // Kontaktivahendi liik klassifikaatorist 114
     @Column(name = "ID_KV_LIIGID", length = 100, nullable = false)

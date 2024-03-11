@@ -1,9 +1,12 @@
 package ee.tu.app.domain;
 
+import io.swagger.models.auth.In;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "IR_AXAPTA_VEAD")
@@ -18,12 +21,14 @@ public class Residence {
     public int id;
 
     // Kui täidetud, siis on tegemist isiku aadressiga
-    @Column(name = "ID_ISIK")
-    public int personId;
+    @JoinColumn(name = "ID_ISIK")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public Person person;
 
     // todo Aadressi asumikood. Viide ir_asumikood.id_asumikood peale
-    @Column(name = "ID_ASUMIKOOD")
-    public int locationId;
+    @JoinColumn(name = "ID_ASUMIKOOD")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public ResidenceCode residenceCode;
 
     // Aadressi postiindeks
     @Column(name = "POSTIINDEKS")
@@ -73,17 +78,16 @@ public class Residence {
     public Date updatedAt;
 
     // Kui täidetud, siis on tegemist asutuse aadressiga
-    @Column(name = "ID_ASUTUS")
-    public int institutionId;
+    @JoinColumn(name = "ID_ASUTUS")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public Institution institution;
 
     // todo  Mis maaga on tegemist. Viide ir_maad.id_maad peale
-    @Column(name = "ID_MAAD", nullable = false)
-    public int coutryId;
+    @JoinColumn(name = "ID_MAAD", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public Country country;
 
     //Aadressi tekstiline osa: linn
     @Column(name = "LINN_TEKSTINA")
     public String cityName;
-
-
-
 }

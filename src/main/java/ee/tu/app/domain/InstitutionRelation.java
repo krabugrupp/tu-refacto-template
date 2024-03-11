@@ -15,9 +15,10 @@ public class InstitutionRelation {
     @Column(name = "ID_ASUTUS_SUHE")
     public int id;
 
+    // todo ?
     @Column(name = "ID_ASUTUS_EELLANE")
     public int firstInstitution;
-
+    // todo ?
     @Column(name = "ID_ASUTUS_JARGLANE")
     public int secondInstitution;
 

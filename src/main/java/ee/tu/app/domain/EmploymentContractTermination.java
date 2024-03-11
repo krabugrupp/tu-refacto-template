@@ -16,8 +16,9 @@ public class EmploymentContractTermination {
     public int id;
 
     // Mis töölepingu peatamisega on tegemist
-    @Column(name = "ID_TOOLEPING")
-    public int employmentContractId;
+    @JoinColumn(name = "ID_TOOLEPING")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public EmploymentContract employmentContract;
 
     // Töölepingu peatamise liik klassifikaatorist 323
     @Column(name = "KL_PUUDUMISE_LIIK")
@@ -40,8 +41,9 @@ public class EmploymentContractTermination {
     public int axaptaAbsenceStatus;
 
     // Isiku ID, kes on määratud asendajaks
-    @Column(name = "ID_ISIK_ASENDAJA")
-    public int replacingPersonId;
+    @JoinColumn(name = "ID_ISIK_ASENDAJA")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public Person replacingPerson;
 
     // Kas tegemist on parandava reaga. Kui jah, siis on puhkuse katkestus ja nullib ära osa või terve puhkuse, mis on näidatud id_parandatav_peatamine sees
     @Column(name = "KAS_PARANDUS")

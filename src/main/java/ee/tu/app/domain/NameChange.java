@@ -14,8 +14,9 @@ public class NameChange {
     public int id;
 
     // Mis isiku nimega on tegemist
-    @Column(name = "ID_ISIK")
-    public int personId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_ISIK")
+    public Person person;
 
     // Isiku eelmine eesnimi
     @Column(name = "V_E_NIMI", length = 100)

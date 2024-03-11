@@ -15,9 +15,10 @@ public class Vacation {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     public int id;
     
-    // Millise töölepingu küljes antud puhkus on TODO VIIDE
-    @Column(name = "ID_TOOLEPING")
-    public int employmentContractId;
+    // Millise töölepingu küljes antud puhkus on
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_TOOLEPING")
+    public EmploymentContract employmentContract;
     
     // Mis aasta puhkusega on tegemist
     @Column(name = "AASTA")

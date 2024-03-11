@@ -3,7 +3,9 @@ package ee.tu.app.domain;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "IR_ASUTUS")
@@ -61,4 +63,12 @@ public class Institution {
 
     @Column(name = "ERASMUS_KOOD", length = 50)
     public String erasmusCode;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "institution")
+    private List<Degree> givenDegreeList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "institution")
+    private List<Education> educationList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "institution")
+    private List<Residence> residenceList = new ArrayList<>();
+
 }

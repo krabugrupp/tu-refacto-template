@@ -2,7 +2,9 @@ package ee.tu.app.domain;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "IR_PALGAASTE")
@@ -15,8 +17,9 @@ public class SalaryData {
     public int id;
 
     // Millise töölepingu rea küljes antud palgaaste on
-    @Column(name = "ID_KATEGOORIA")
-    public int categoryId;
+    @JoinColumn(name = "ID_KATEGOORIA")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public EmploymentCategory employmentCategory;
 
     // Palgaastme väärtus
     @Column(name = "PALGAASTE")

@@ -14,12 +14,15 @@ public class DuplicatePersonsLog {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     public int id;
 
-    @Column(name = "ID_ISIK_VANA")
-    public int oldPersonId;
+    //  Vana isiku ID
+    @JoinColumn(name = "ID_ISIK_VANA")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public Person oldPerson;
 
-    // Uue isiku ID
-    @Column(name = "ID_ISIK_UUS")
-    public int newPersonId;
+    //   Uue isiku ID
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_ISIK_UUS")
+    public Person newPerson;
 
     // Vana isiku UUID
     @Column(name = "UUID_VANA", length = 40)

@@ -12,12 +12,15 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_LOGI")
     public int id;
+
     // Selle tabeli primaarvõtme väärtus, kus muutus toimus
     @Column(name = "ID_TABEL_RIDA")
     public int tableRowId;
+
     // Tabeli nimi, kus muutus toimus
     @Column(name = "TABELI_NIMI", length = 30)
     public String tableName;
+
     // Sündmuse ID: -1=kustutamine, 0=muutmine, 1=lisamine
     @Column(name = "ID_SYNDMUS")
     public int eventId;

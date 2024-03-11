@@ -14,9 +14,10 @@ public class Degree {
     @Column(name = "ID_KRAAD")
     public int id;
 
-    // Viide asutusele, kes kraadi väljastas (ir_asutus.id_asutus) TODO
-    @Column(name = "ID_OMISTAJA")
-    public int institutionId;
+    // Viide asutusele, kes kraadi väljastas (ir_asutus.id_asutus)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_OMISTAJA")
+    public Institution institution;
 
     // Kraadi liik IR klassifikaatorist 310
     @Column(name = "KL_KRAADI_LIIK")
@@ -33,6 +34,7 @@ public class Degree {
     //Kraadi nimetus tekstina
     @Column(name = "NIMETUS", length = 255)
     public String degreeName;
+
     //Kraadi eriala tekstina
     @Column(name = "ERIALA", length = 255)
     public String specialization;
@@ -50,8 +52,9 @@ public class Degree {
     public Date updatedAt;
 
     //Millise hariduse juurde antud kraad kuulub
-    @Column(name = "ID_HARIDUS", nullable = false)
-    public int educationId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_HARIDUS", nullable = false)
+    public Education education;
 
     //Kraadi lühend (tuleb nt AXAPTAst)
     @Column(name = "LYHEND", length = 15)

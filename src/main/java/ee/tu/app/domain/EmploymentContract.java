@@ -1,7 +1,9 @@
 package ee.tu.app.domain;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 // Isikute töölepingud, tulevad ainult AXAPTAst
 @Entity
@@ -14,8 +16,9 @@ public class EmploymentContract {
     public int id;
 
     // Millise isiku töölepinguga on tegemist
-    @Column(name = "ID_ISIK")
-    public int personId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_ISIK")
+    public Person person;
 
     // Töölepingu sõlmimise kuupäev
     @Column(name = "SOLMIMISE_KP")
@@ -45,4 +48,11 @@ public class EmploymentContract {
     @Column(name = "KL_KEHTIVUS")
     public Integer validity;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employmentContract")
+    private List<EmploymentCategory> employmentCategoryList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employmentContract")
+    private List<EmploymentContractTermination> employmentContractTerminationList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employmentContract")
+    private List<Vacation> vacationList = new ArrayList<>();
 }

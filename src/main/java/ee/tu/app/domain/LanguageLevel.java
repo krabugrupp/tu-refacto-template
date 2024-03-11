@@ -15,8 +15,9 @@ public class LanguageLevel {
     public int id;
 
     // Mis isiku keeleoskusega on tegemist
-    @Column(name = "ID_ISIK")
-    public int personId;
+    @JoinColumn(name = "ID_ISIK")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    public Person person;
 
     // Keel klassifikaatorist 2
     @Column(name = "KL_KEEL", nullable = false)

@@ -1,6 +1,9 @@
 package ee.tu.app.domain;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "IR_STRUKTUUR")
@@ -107,4 +110,6 @@ public class Structure {
     @Column(name = "ID_ISIK_ARVESTAJA")
     public int accountantPersonId;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "structure")
+    private List<EmploymentCategory> employmentCategoryList = new ArrayList<>();
 }

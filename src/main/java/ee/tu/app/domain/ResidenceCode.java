@@ -3,7 +3,9 @@ package ee.tu.app.domain;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "IR_ASUMIKOOD")
@@ -38,11 +40,14 @@ public class ResidenceCode {
     @Column(name = "ID_VALD")
     public int municipalityId;
 
-    @Column(name = "ID_MAAKOND")
-    public int countryId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_MAAKOND")
+    public Country country;
 
     @Column(name = "LOPP_KP")
     public int endAt;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "residenceCode")
+    private List<Residence> residenceList = new ArrayList<>();
 
 }

@@ -3,7 +3,9 @@ package ee.tu.app.domain;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "IR_ISIK")
@@ -59,8 +61,9 @@ public class Person {
     public Date updatedAt;
 
     // Kodakondsuse id_maad
-    @Column(name = "ID_MAAD_KODAKONDSUS")
-    public int citizenshipId;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_MAAD_KODAKONDSUS")
+    public Country countryCitizenship;
 
     //Isiku unikaalne ja avalik UUID [ÕIS2]
     @Column(name = "UUID", length = 40)
@@ -69,4 +72,33 @@ public class Person {
     // FO isiku id, muudetakse ainult fo-ir liidese kaudu
     @Column(name = "EMPLID", length = 20)
     public String emplId;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<PersonAttribute> personAttributeList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<Nickname> personNicknameList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<NameChange> personNameChangeList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<Contact> personContactList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<Education> personEducationList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "oldPerson")
+    private List<DuplicatePersonsLog> oldPersonsDuplicateEducationList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "newPerson")
+    private List<DuplicatePersonsLog> newPersonsDuplicateEducationList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<EmploymentCategory> employmentCategoryList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<EmploymentContract> employmentContractList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "replacingPerson")
+    private List<EmploymentContractTermination> replacingPersonEmploymentContractTerminationList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<ForeignCitizenship> foreignCitizenshipList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<Image> imageList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<Residence> residenceList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+    private List<LanguageLevel> languageLevelList = new ArrayList<>();
 }

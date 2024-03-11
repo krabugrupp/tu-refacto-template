@@ -16,7 +16,7 @@ public class UserCredentials {
     @Column(name = "ID_LDAP")
     public int id;
 
-    // Mis isikule antud tunnus kuulub
+    // Mis isikule antud tunnus kuulub todo user or person?
     @Column(name = "ID_ISIK", nullable = false)
     public int personId;
 
