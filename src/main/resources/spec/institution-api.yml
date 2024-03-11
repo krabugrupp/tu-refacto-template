@@ -1,0 +1,298 @@
+openapi: 3.0.3
+info:
+  title: TU institution API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080/api/institution
+
+tags:
+  - name: institution
+
+paths:
+
+components:
+  schemas:
+    ContractSuspension:
+      type: object
+      properties:
+        absenceStatus:
+          type: integer
+          format: int32
+        end:
+          type: string
+        isNotVacation:
+          type: boolean
+        start:
+          type: string
+        suspensionLength:
+          type: integer
+          format: int32
+        type:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+    Degree:
+      type: object
+      properties:
+        abbreviation:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+        attributedAt:
+          type: string
+        attributingInstitution:
+          type: string
+        axaptaType:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        name:
+          type: string
+        speciality:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+        type:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        vocation:
+          type: string
+    Education:
+      type: object
+      properties:
+        degree:
+          $ref: '#/components/schemas/Degree'
+        documentNumber:
+          type: string
+        duration:
+          $ref: '#/components/schemas/StudyDuration'
+        formHigher:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        formSecondary:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        institution:
+          $ref: '#/components/schemas/EduInstitution'
+        isCumLaude:
+          type: boolean
+        medal:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        studyLevel:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        studyType:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+    EduInstitution:
+      type: object
+      properties:
+        erasmusCode:
+          type: string
+        id:
+          type: integer
+          format: int32
+        name:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+        originalName:
+          type: string
+        websiteUrl:
+          type: string
+        yearClosed:
+          type: integer
+          format: int32
+    EduInstitutionSearchRequest:
+      type: object
+      properties:
+        category:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        erasmusCode:
+          type: string
+          maxLength: 40
+          minLength: 2
+        name:
+          type: string
+          maxLength: 40
+          minLength: 2
+        nameEn:
+          type: string
+          maxLength: 40
+          minLength: 2
+        start:
+          type: integer
+          minimum: 1
+        take:
+          type: integer
+          minimum: 1
+          maximum: 300
+        type:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+    LocationData:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+        parentCode:
+          type: string
+        type:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        validUntil:
+          type: string
+    StructuralUnitData:
+      type: object
+      properties:
+        academic:
+          type: boolean
+        address:
+          type: string
+        city:
+          type: string
+        code:
+          type: string
+        email:
+          type: string
+        level:
+          type: integer
+          format: int32
+        name:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+        parentUnitId:
+          type: integer
+          format: int32
+        phone:
+          type: string
+        supportsContinuousLearning:
+          type: boolean
+        validSince:
+          type: string
+        validUntil:
+          type: string
+        webpageUrl:
+          type: string
+        zip:
+          type: string
+    StructuralUnitSearchRequest_Search:
+      type: object
+      properties:
+        code:
+          type: string
+          maxLength: 40
+          minLength: 2
+        is_academic:
+          type: boolean
+        is_training:
+          type: boolean
+        level:
+          type: integer
+          maximum: 10
+          minimum: 1
+        name:
+          type: string
+          maxLength: 40
+          minLength: 2
+        q:
+          type: string
+          maxLength: 40
+          minLength: 2
+        start:
+          type: integer
+          minimum: 1
+        take:
+          type: integer
+          maximum: 300
+          minimum: 1
+    StructuralUnit_Public:
+      type: object
+      properties:
+        academic:
+          type: boolean
+        address:
+          type: string
+        city:
+          type: string
+        code:
+          type: string
+        email:
+          type: string
+        is_expired:
+          type: boolean
+        level:
+          type: integer
+          format: int32
+        name:
+          $ref: 'util-api.yml#/components/schemas/Translations_Public'
+        parentCode:
+          type: string
+        phone:
+          type: string
+        supportsContinuousLearning:
+          type: boolean
+        webpageUrl:
+          type: string
+        zip:
+          type: string
+    StructuralUnit_Search:
+      type: object
+      properties:
+        academic:
+          type: boolean
+        address:
+          type: string
+        city:
+          type: string
+        code:
+          type: string
+        email:
+          type: string
+        is_expired:
+          type: boolean
+        level:
+          type: integer
+          format: int32
+        name:
+          $ref: 'util-api.yml#/components/schemas/Translations_Search'
+        parentCode:
+          type: string
+        phone:
+          type: string
+        supportsContinuousLearning:
+          type: boolean
+        webpageUrl:
+          type: string
+        zip:
+          type: string
+    StudyDuration:
+      type: object
+      properties:
+        beginningYear:
+          type: integer
+          format: int32
+        endYear:
+          type: integer
+          format: int32
+        durationYears:
+          type: integer
+          format: int32
+    WorkRelation:
+      type: object
+      properties:
+        beginning:
+          type: string
+        category:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        contract:
+          $ref: 'person-api.yml#/components/schemas/WorkContract'
+        end:
+          type: string
+        joblevelId:
+          type: string
+        load:
+          type: number
+        note:
+          type: string
+        phone:
+          type: string
+        speciality:
+          type: string
+        state:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        structuralUnit:
+          $ref: 'util-api.yml#/components/schemas/StructuralUnit'
+        suspensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractSuspension'
+        task:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        title:
+          $ref: 'util-api.yml#/components/schemas/Translations'

@@ -1,0 +1,164 @@
+openapi: 3.0.3
+info:
+  title: TU util API
+  version: 1.0.0
+servers:
+    - url: http://localhost:8080/api/util
+
+tags:
+    - name: util
+
+paths:
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/Classificator'
+        country:
+          $ref: '#/components/schemas/Country'
+        location:
+          $ref: '#/components/schemas/Location'
+        locationPlainText:
+          type: string
+          maxLength: 100
+          minLength: 0
+        postalCode:
+          type: string
+          maxLength: 10
+          minLength: 0
+        address:
+          type: string
+          maxLength: 300
+          minLength: 0
+        institution:
+          $ref: 'institution-api.yml#/components/schemas/EduInstitution'
+
+    Classificator:
+      type: object
+      properties:
+        code:
+          type: string
+        et:
+          type: string
+        en:
+          type: string
+
+    ContactInfo:
+      type: object
+      properties:
+        devices:
+          type: array
+        addresses:
+          type: array
+
+    ContactInfoUpdateRequest:
+      type: object
+      properties:
+        devices:
+          type: array
+        addresses:
+          type: array
+
+    Country:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Translations'
+        isoCode2:
+          type: string
+        isoCode3:
+          type: string
+
+    CountryData:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          $ref: '#/components/schemas/Translations'
+        isoCode2:
+          type: string
+        isoCode3:
+          type: string
+
+    Location:
+      type: object
+      properties:
+        code:
+          type: string
+        parentCode:
+          type: string
+        type:
+          $ref: '#/components/schemas/Classificator'
+        name:
+          $ref: '#/components/schemas/Translations'
+
+    LocationData:
+      type: object
+      properties:
+        code:
+          type: string
+        parentCode:
+          type: string
+        type:
+          $ref: '#/components/schemas/Classificator'
+        name:
+          $ref: '#/components/schemas/Translations'
+        validUntil:
+          type: string
+
+    StructuralUnit:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          $ref: '#/components/schemas/Translations'
+        email:
+          type: string
+        phone:
+          type: string
+        webpageUrl:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        street:
+          type: string
+        zip:
+          type: string
+        level:
+          type: integer
+          format: int32
+        academic:
+          type: boolean
+        supportsContinuousLearning:
+          type: boolean
+        parentCode:
+          type: string
+        is_expired:
+          type: boolean
+
+    Translations:
+      type: object
+      properties:
+        empty:
+          type: boolean
+
+    Translations_Public:
+      type: object
+      properties:
+        empty:
+          type: boolean
+
+    Translations_Search:
+      type: object
+      properties:
+        empty:
+          type: boolean
+
+

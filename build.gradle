@@ -109,6 +109,54 @@ task generatePersonApi (type: GenerateTask) {
 			userSpringBoot3: "true"
 	])
 }
+task generateUtilApi (type: GenerateTask) {
+	getGeneratorName().set("spring")
+
+	getInputSpec().set("$projectDir/src/main/resources/spec/util-api.yml")
+	getOutputDir().set("$buildDir/generated/api".toString())
+	getApiPackage().set("ee.tu.app.api")
+	getModelPackage().set("ee.tu.app.api.model")
+	getModelNamePrefix().set("XR")
+	getSkipValidateSpec().set(false)
+	getApiFilesConstrainedTo().set([""])
+	getModelFilesConstrainedTo().set([""])
+	getSupportingFilesConstrainedTo().set(["ApiUtil.java"])
+	getConfigOptions().set([
+			generateSupportingFiles: "false",
+			dateLibrary: "java8",
+			delegatePattern: "true",
+			title: "tu-app",
+			useTags: "true",
+			oas3: "true",
+			useSpringController: "true",
+			useSpringfox: "false",
+			userSpringBoot3: "true"
+	])
+}
+task generateInstitutionApi (type: GenerateTask) {
+	getGeneratorName().set("spring")
+
+	getInputSpec().set("$projectDir/src/main/resources/spec/institution-api.yml")
+	getOutputDir().set("$buildDir/generated/api".toString())
+	getApiPackage().set("ee.tu.app.api")
+	getModelPackage().set("ee.tu.app.api.model")
+	getModelNamePrefix().set("XR")
+	getSkipValidateSpec().set(false)
+	getApiFilesConstrainedTo().set([""])
+	getModelFilesConstrainedTo().set([""])
+	getSupportingFilesConstrainedTo().set(["ApiUtil.java"])
+	getConfigOptions().set([
+			generateSupportingFiles: "false",
+			dateLibrary: "java8",
+			delegatePattern: "true",
+			title: "tu-app",
+			useTags: "true",
+			oas3: "true",
+			useSpringController: "true",
+			useSpringfox: "false",
+			userSpringBoot3: "true"
+	])
+}
 
 
 tasks.named('test') {
@@ -116,10 +164,7 @@ tasks.named('test') {
 }
 
 
-//  4to bi udaljat spring boot app который создается и мешает
-/*tasks.openApiGenerate.doLast {
-	delete "${buildDir}/generated/src/main/java/com/tu/app/OpenApiGeneratorApplication.java"
-}*/
-
 compileJava.dependsOn generatePersonApi
+compileJava.dependsOn generateInstitutionApi
+compileJava.dependsOn generateUtilApi
 
