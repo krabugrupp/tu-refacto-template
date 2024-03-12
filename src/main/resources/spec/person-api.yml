@@ -1,0 +1,242 @@
+openapi: 3.0.3
+info:
+  title: TU Person API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080/api/persion
+
+tags:
+  - name: person
+
+paths:
+
+  /:
+    get:
+      tags:
+        - person
+      summary: Person test
+      operationId: getPerson
+      responses:
+        '200':
+          description: Приветствие
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+
+
+components:
+  schemas:
+    BankAccount:
+      type: object
+      properties:
+        ownerFirstName:
+          type: string
+          maxLength: 100
+          minLength: 1
+        ownerLastName:
+          type: string
+          maxLength: 100
+          minLength: 1
+        accountNumber:
+          type: string
+          maxLength: 34
+          minLength: 10
+
+    BankAccountUpdateRequest:
+      type: object
+      properties:
+        ownerFirstName:
+          type: string
+          maxLength: 100
+          minLength: 1
+        ownerLastName:
+          type: string
+          maxLength: 100
+          minLength: 1
+        accountNumber:
+          type: string
+          maxLength: 34
+          minLength: 10
+
+    ExtendedPerson:
+      type: object
+      properties:
+        dateOfBirth:
+          type: string
+        personalId:
+          type: string
+        person:
+          $ref: 'person-api.yml#/components/schemas/Person'
+
+    GraphQLQuery:
+      type: object
+      properties:
+        query:
+          type: string
+
+    HasExistingAccountResponse:
+      type: object
+      properties:
+        canLogin:
+          type: boolean
+        hasAccount:
+          type: boolean
+
+    Person:
+      type: object
+      properties:
+        firstName:
+          type: string
+        fullName:
+          type: string
+        id:
+          type: integer
+          format: int64
+        lastName:
+          type: string
+        officialEmail:
+          type: string
+        officialFax:
+          type: string
+        officialMobile:
+          type: string
+        officialPhone:
+          type: string
+        personalPhone:
+          type: string
+        units:
+          type: array
+          items:
+            $ref: '#/components/schemas/PersonUnitJob'
+        uuid:
+          type: string
+
+
+    PersonDetails:
+      type: object
+      properties:
+        bank:
+          $ref: '#/components/schemas/BankAccount'
+        birthplace:
+          $ref: 'util-api.yml#/components/schemas/Address'
+        citizenship:
+          $ref: 'util-api.yml#/components/schemas/Country'
+        dateOfBirth:
+          type: string
+        origin:
+          $ref: 'util-api.yml#/components/schemas/Address'
+        personalCode:
+          type: string
+        sex:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+
+    PersonSearchRequest:
+      type: object
+      properties:
+        isActive:
+          type: boolean
+        isEmployee:
+          type: boolean
+        isStudent:
+          type: boolean
+        internal:
+          type: boolean
+        jobTitle:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+        name:
+          type: string
+          maxLength: 40
+          minLength: 2
+        start:
+          type: integer
+          minimum: 1
+        structuralUnits:
+          type: array
+          items:
+            $ref: 'util-api.yml#/components/schemas/StructuralUnit'
+        studyLevel:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        studyType:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        take:
+          type: integer
+          minimum: 1
+          maximum: 300
+        uuids:
+          type: array
+          items:
+            type: string
+
+    PersonUnitJob:
+      type: object
+      properties:
+        jobCategory:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+        jobTitle:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+        structuralUnitCode:
+          type: string
+        structuralUnitName:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+
+    UserAccountInfo:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserAccountPeriod'
+        emailAddresses:
+          type: array
+          items:
+            type: string
+        lastPasswordChange:
+          type: string
+          format: date-time
+        storage:
+          $ref: '#/components/schemas/UserStorage'
+        username:
+          type: string
+
+    UserAccountPeriod:
+      type: object
+      properties:
+        sinceDateTime:
+          type: string
+          format: date-time
+        untilDateTime:
+          type: string
+          format: date-time
+        username:
+          type: string
+
+    UserStorage:
+      type: object
+      properties:
+        limitHardKb:
+          type: integer
+          format: int32
+        limitSoftKb:
+          type: integer
+          format: int32
+        usedKb:
+          type: integer
+          format: int32
+
+    WorkContract:
+      type: object
+      properties:
+        signingDate:
+          type: string
+          format: date
+        number:
+          type: string
+        start:
+          type: string
+          format: date
+        end:
+          type: string
+          format: date
+

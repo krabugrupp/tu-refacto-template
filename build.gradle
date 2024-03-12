@@ -1,3 +1,5 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask;
+
 plugins {
 	id 'java'
 	id 'idea'
@@ -8,9 +10,9 @@ plugins {
 }
 
 springBoot {
-	mainClass = 'com.tu.app.TuAppApplication'
+	mainClass = 'ee.tu.app.TuAppApplication'
 }
-group = 'com.tu.app'
+group = 'ee.tu.app'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -64,7 +66,7 @@ dependencies {
 
 
 	// Docker database on startup
-	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+	//developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 	runtimeOnly 'org.postgresql:postgresql'
@@ -75,45 +77,95 @@ dependencies {
 
 }
 
-// Todo "/generated/src/main/java/com/tu/app/OpenApiGeneratorApplication.java" из-за этого файла не работают ендпоинты
-openApiGenerate {
-	generatorName = "spring"
-	inputSpec = "${projectDir}/src/main/resources/spec/test-api.yml"
-	apiPackage = "com.tu.app.api"
-	modelPackage = "com.tu.app.api.model"
-	outputDir = "${buildDir}/generated"
-	skipValidateSpec = false
-	generateApiDocumentation = false
-	configOptions = [
-			title: "tu",
-			basePackage: "com.tu.app",
-			dateLibrary: "java8",
-			sourceFolder: "src/main/java",
-			library: "spring-boot",
-			delegatePattern: "true",
-
-
-	]
-}
 sourceSets {
 	main {
 		java {
-			srcDir "${buildDir}/generated/src/main/java"
+			srcDirs "src/main/java", "$buildDir/generated/api/src/main/java"
 		}
 	}
 }
 
-compileJava {
-	source += sourceSets.main.java
+task generatePersonApi (type: GenerateTask) {
+	getGeneratorName().set("spring")
 
+	getInputSpec().set("$projectDir/src/main/resources/spec/person-api.yml")
+	getOutputDir().set("$buildDir/generated/api".toString())
+	getApiPackage().set("ee.tu.app.api")
+	getModelPackage().set("ee.tu.app.api.model")
+	getModelNamePrefix().set("XR")
+	getSkipValidateSpec().set(false)
+	getApiFilesConstrainedTo().set([""])
+	getModelFilesConstrainedTo().set([""])
+	getSupportingFilesConstrainedTo().set(["ApiUtil.java"])
+	getConfigOptions().set([
+	        generateSupportingFiles: "false",
+			dateLibrary: "java8",
+			delegatePattern: "true",
+			title: "tu-app",
+			useTags: "true",
+			oas3: "true",
+			useSpringController: "true",
+			useSpringfox: "false",
+			userSpringBoot3: "true"
+	])
 }
+task generateUtilApi (type: GenerateTask) {
+	getGeneratorName().set("spring")
+
+	getInputSpec().set("$projectDir/src/main/resources/spec/util-api.yml")
+	getOutputDir().set("$buildDir/generated/api".toString())
+	getApiPackage().set("ee.tu.app.api")
+	getModelPackage().set("ee.tu.app.api.model")
+	getModelNamePrefix().set("XR")
+	getSkipValidateSpec().set(false)
+	getApiFilesConstrainedTo().set([""])
+	getModelFilesConstrainedTo().set([""])
+	getSupportingFilesConstrainedTo().set(["ApiUtil.java"])
+	getConfigOptions().set([
+			generateSupportingFiles: "false",
+			dateLibrary: "java8",
+			delegatePattern: "true",
+			title: "tu-app",
+			useTags: "true",
+			oas3: "true",
+			useSpringController: "true",
+			useSpringfox: "false",
+			userSpringBoot3: "true"
+	])
+}
+task generateInstitutionApi (type: GenerateTask) {
+	getGeneratorName().set("spring")
+
+	getInputSpec().set("$projectDir/src/main/resources/spec/institution-api.yml")
+	getOutputDir().set("$buildDir/generated/api".toString())
+	getApiPackage().set("ee.tu.app.api")
+	getModelPackage().set("ee.tu.app.api.model")
+	getModelNamePrefix().set("XR")
+	getSkipValidateSpec().set(false)
+	getApiFilesConstrainedTo().set([""])
+	getModelFilesConstrainedTo().set([""])
+	getSupportingFilesConstrainedTo().set(["ApiUtil.java"])
+	getConfigOptions().set([
+			generateSupportingFiles: "false",
+			dateLibrary: "java8",
+			delegatePattern: "true",
+			title: "tu-app",
+			useTags: "true",
+			oas3: "true",
+			useSpringController: "true",
+			useSpringfox: "false",
+			userSpringBoot3: "true"
+	])
+}
+
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
 
-//  4to bi udaljat spring boot app который создается и мешает
-tasks.openApiGenerate.doLast {
-	delete "${buildDir}/generated/src/main/java/com/tu/app/OpenApiGeneratorApplication.java"
-}
+compileJava.dependsOn clean
+compileJava.dependsOn generatePersonApi
+compileJava.dependsOn generateInstitutionApi
+compileJava.dependsOn generateUtilApi
+
