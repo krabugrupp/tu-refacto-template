@@ -12,7 +12,7 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_PILT")
-    public int id;
+    public Long id;
     
     // Kasutaja arvuti poolt failile kaasa pandud mime tüüp
     @Column(name = "MIME_TYPE", length = 128)

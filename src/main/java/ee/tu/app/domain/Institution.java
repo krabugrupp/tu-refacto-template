@@ -15,7 +15,7 @@ public class Institution {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_ASUTUS")
-    public int id;
+    public Long id;
 
     @Column(name = "NIMI", length = 100, nullable = false)
     public String name;

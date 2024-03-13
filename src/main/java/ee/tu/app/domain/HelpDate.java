@@ -13,7 +13,7 @@ public class HelpDate {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_KONTAKTIVAHEND")
-    public int id;
+    public Long id;
 
     // Kuupäev
     @Column(name = "KUUPAEV")

@@ -16,7 +16,7 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_KONTAKTIVAHEND")
-    public int id;
+    public Long id;
 
     // Millise isiku isikukoodiga on tegemist
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

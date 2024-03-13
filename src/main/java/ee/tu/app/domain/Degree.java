@@ -12,7 +12,7 @@ public class Degree {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_KRAAD")
-    public int id;
+    public Long id;
 
     // Viide asutusele, kes kraadi väljastas (ir_asutus.id_asutus)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

@@ -14,7 +14,7 @@ public class InnerRangeUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID", nullable = false)
-    public int id;
+    public Long id;
 
     // Kasutaja isikukood
     @Column(name = "ISIKUKOOD", length = 100)

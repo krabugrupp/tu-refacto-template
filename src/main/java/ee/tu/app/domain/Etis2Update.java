@@ -8,14 +8,14 @@ import java.util.Date;
 @Entity
 @Table(name = "IR_ETIS2_UUENDADA")
 @NoArgsConstructor
-public class ETIS2Update {
+public class Etis2Update {
 
     // todo PRIMARY KEY nimetus
     //PK_IR_ETIS2_UUENDADA ID_ISIK, ID_KATEGOORIA
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    public int id;
+    public Long id;
     // Isiku id. Viide ir_isik.id_isik peale
 
     @Column(name = "ID_ISIK", nullable = false)

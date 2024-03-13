@@ -11,7 +11,7 @@ public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_LOGI")
-    public int id;
+    public Long id;
 
     // Selle tabeli primaarvõtme väärtus, kus muutus toimus
     @Column(name = "ID_TABEL_RIDA")

@@ -13,7 +13,7 @@ public class EmploymentContract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_TOOLEPING")
-    public int id;
+    public Long id;
 
     // Millise isiku töölepinguga on tegemist
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

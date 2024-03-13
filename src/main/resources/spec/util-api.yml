@@ -3,25 +3,449 @@ info:
   title: TU util API
   version: 1.0.0
 servers:
-    - url: http://localhost:8080/api/util
+    - url: http://localhost:8080/api/
 
 tags:
     - name: util
 
 paths:
-  /:
-    get:
+  /structural-units/search:
+    post:
       tags:
-        - classificator
-      summary: Classificator test
-      operationId: getClassificator
+        - structural-unit
+      summary: Search for structural units
+      operationId: searchStructuralUnits
+      requestBody:
+        required: true
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/StructuralUnitSearchRequest_Search'
       responses:
         '200':
-          description: Приветствие
+          description: OK
           content:
-            application/json:
+            application/json;charset=UTF-8:
               schema:
-                $ref: '#/components/schemas/Classificator'
+                type: array
+                items:
+                  $ref: '#/components/schemas/StructuralUnit_Search'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /structural-units:
+    get:
+      tags:
+        - structural-unit
+      summary: Get all structural units
+      operationId: getAllStructuralUnits
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StructuralUnit_Public'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /structural-units/{unitCode}/units:
+    get:
+      tags:
+        - structural-unit
+      summary: Get child units of a structural unit
+      operationId: getChildUnitsOfStructuralUnit
+      parameters:
+        - name: unitCode
+          in: path
+          description: Code of the structural unit
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StructuralUnit_Public'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /structural-units/{unitCode}/units/{lang}:
+    get:
+      tags:
+        - structural-unit
+      summary: Get child units of a structural unit in a specific language
+      operationId: getChildUnitsOfStructuralUnitInLang
+      parameters:
+        - name: unitCode
+          in: path
+          description: Code of the structural unit
+          required: true
+          schema:
+            type: string
+        - name: lang
+          in: path
+          description: Language code
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /structural-units/{unitCode}:
+    get:
+      tags:
+        - structural-unit
+      summary: Get details of a structural unit
+      operationId: getStructuralUnitDetails
+      parameters:
+        - name: unitCode
+          in: path
+          description: Code of the structural unit
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/StructuralUnit_Public'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /structural-units/{lang}:
+    get:
+      tags:
+        - structural-unit
+      summary: Get all structural unit names in a specific language
+      operationId: getAllStructuralUnitNamesInLang
+      parameters:
+        - name: lang
+          in: path
+          description: Language code
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /structural-units/continuous-learning:
+    get:
+      tags:
+        - structural-unit
+      summary: Get structural units supporting continuous learning
+      operationId: getContinuousLearningStructuralUnits
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StructuralUnit'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /structural-units/all:
+    get:
+      tags:
+        - structural-unit
+      summary: Get all structural units with full details
+      operationId: getAllStructuralUnitsFullDetails
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StructuralUnitData'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /structural-units/academic:
+    get:
+      tags:
+        - structural-unit
+      summary: Get all academic structural units
+      operationId: getAllAcademicStructuralUnits
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StructuralUnit'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /structural-units/academic/institutes:
+    get:
+      tags:
+        - structural-unit
+      summary: Get all academic institutes
+      operationId: getAllAcademicInstitutes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StructuralUnit'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+#TODO MOVE LOCATIONS?
+  /locations:
+    get:
+      tags:
+        - location
+      summary: Get all countries
+      operationId: getAllCountries
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /locations/{countryCode}:
+    get:
+      tags:
+        - location
+      summary: Get details of a country
+      operationId: getCountryDetails
+      parameters:
+        - name: countryCode
+          in: path
+          description: ISO code of the country
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Country'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /locations/{countryCode}/{locationCode}:
+    get:
+      tags:
+        - location
+      summary: Get details of a location within a country
+      operationId: getLocationDetails
+      parameters:
+        - name: countryCode
+          in: path
+          description: ISO code of the country
+          required: true
+          schema:
+            type: string
+        - name: locationCode
+          in: path
+          description: Code of the location
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /locations/{countryCode}/{locationCode}/parts:
+    get:
+      tags:
+        - location
+      summary: Get sub-locations of a location within a country
+      operationId: getLocationSubLocations
+      parameters:
+        - name: countryCode
+          in: path
+          description: ISO code of the country
+          required: true
+          schema:
+            type: string
+        - name: locationCode
+          in: path
+          description: Code of the location
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /locations/{countryCode}/{locationCode}/all:
+    get:
+      tags:
+        - location
+      summary: Get all locations within a country
+      operationId: getAllLocationsInCountry
+      parameters:
+        - name: countryCode
+          in: path
+          description: ISO code of the country
+          required: true
+          schema:
+            type: string
+        - name: locationCode
+          in: path
+          description: Code of the location
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /locations/{countryCode}/parts:
+    get:
+      tags:
+        - location
+      summary: Get sub-locations of a country
+      operationId: getCountrySubLocations
+      parameters:
+        - name: countryCode
+          in: path
+          description: ISO code of the country
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /locations/{countryCode}/all:
+    get:
+      tags:
+        - location
+      summary: Get all locations within a country
+      operationId: getAllLocationsInCountry
+      parameters:
+        - name: countryCode
+          in: path
+          description: ISO code of the country
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /locations/export/locations:
+    get:
+      tags:
+        - location
+      summary: Export all locations
+      operationId: exportAllLocations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LocationData'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /locations/export/countries:
+    get:
+      tags:
+        - location
+      summary: Export all countries
+      operationId: exportAllCountries
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryData'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
 components:
   schemas:
     Address:
@@ -128,19 +552,6 @@ components:
         name:
           $ref: '#/components/schemas/Translations'
 
-    LocationData:
-      type: object
-      properties:
-        code:
-          type: string
-        parentCode:
-          type: string
-        type:
-          $ref: '#/components/schemas/Classificator'
-        name:
-          $ref: '#/components/schemas/Translations'
-        validUntil:
-          type: string
 
     StructuralUnit:
       type: object
@@ -174,7 +585,154 @@ components:
           type: string
         is_expired:
           type: boolean
-
+    LocationData:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+        parentCode:
+          type: string
+        type:
+          $ref: 'util-api.yml#/components/schemas/Classificator'
+        validUntil:
+          type: string
+    StructuralUnitData:
+      type: object
+      properties:
+        academic:
+          type: boolean
+        address:
+          type: string
+        city:
+          type: string
+        code:
+          type: string
+        email:
+          type: string
+        level:
+          type: integer
+          format: int32
+        name:
+          $ref: 'util-api.yml#/components/schemas/Translations'
+        parentUnitId:
+          type: integer
+          format: int32
+        phone:
+          type: string
+        supportsContinuousLearning:
+          type: boolean
+        validSince:
+          type: string
+        validUntil:
+          type: string
+        webpageUrl:
+          type: string
+        zip:
+          type: string
+    StructuralUnitSearchRequest_Search:
+      type: object
+      properties:
+        code:
+          type: string
+          maxLength: 40
+          minLength: 2
+        is_academic:
+          type: boolean
+        is_training:
+          type: boolean
+        level:
+          type: integer
+          maximum: 10
+          minimum: 1
+        name:
+          type: string
+          maxLength: 40
+          minLength: 2
+        q:
+          type: string
+          maxLength: 40
+          minLength: 2
+        start:
+          type: integer
+          minimum: 1
+        take:
+          type: integer
+          maximum: 300
+          minimum: 1
+    StructuralUnit_Public:
+      type: object
+      properties:
+        academic:
+          type: boolean
+        address:
+          type: string
+        city:
+          type: string
+        code:
+          type: string
+        email:
+          type: string
+        is_expired:
+          type: boolean
+        level:
+          type: integer
+          format: int32
+        name:
+          $ref: 'util-api.yml#/components/schemas/Translations_Public'
+        parentCode:
+          type: string
+        phone:
+          type: string
+        supportsContinuousLearning:
+          type: boolean
+        webpageUrl:
+          type: string
+        zip:
+          type: string
+    StructuralUnit_Search:
+      type: object
+      properties:
+        academic:
+          type: boolean
+        address:
+          type: string
+        city:
+          type: string
+        code:
+          type: string
+        email:
+          type: string
+        is_expired:
+          type: boolean
+        level:
+          type: integer
+          format: int32
+        name:
+          $ref: 'util-api.yml#/components/schemas/Translations_Search'
+        parentCode:
+          type: string
+        phone:
+          type: string
+        supportsContinuousLearning:
+          type: boolean
+        webpageUrl:
+          type: string
+        zip:
+          type: string
+    StudyDuration:
+      type: object
+      properties:
+        beginningYear:
+          type: integer
+          format: int32
+        endYear:
+          type: integer
+          format: int32
+        durationYears:
+          type: integer
+          format: int32
     Translations:
       type: object
       properties:

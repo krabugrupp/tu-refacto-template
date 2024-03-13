@@ -14,7 +14,7 @@ public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_MAAD")
-    public int id;
+    public Long id;
 
     // Ei kasutata todo delete?
     @Column(name = "MASTER")

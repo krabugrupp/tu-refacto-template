@@ -14,7 +14,7 @@ public class InnerRangeCard {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_INT")
-    public int id;
+    public Long id;
 
     // Kaardi id (guid) inner range andmebaasis - Database ID todo guid???
     @Column(name = "ID", length = 40, nullable = false)

@@ -14,7 +14,7 @@ public class UserCredentials {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_LDAP")
-    public int id;
+    public Long id;
 
     // Mis isikule antud tunnus kuulub todo user or person?
     @Column(name = "ID_ISIK", nullable = false)

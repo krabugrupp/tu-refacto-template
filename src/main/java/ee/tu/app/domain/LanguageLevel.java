@@ -12,7 +12,7 @@ public class LanguageLevel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_KEEL")
-    public int id;
+    public Long id;
 
     // Mis isiku keeleoskusega on tegemist
     @JoinColumn(name = "ID_ISIK")

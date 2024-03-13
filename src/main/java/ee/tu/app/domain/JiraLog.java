@@ -12,7 +12,7 @@ public class JiraLog {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID")
-    public int id;
+    public Long id;
 
     // Logi tekkimise aeg
     @Column(name = "AEG", nullable = false)

@@ -16,7 +16,7 @@ public class Education {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_HARIDUS")
-    public int id;
+    public Long id;
 
     // Mis isiku haridusega on tegemist
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

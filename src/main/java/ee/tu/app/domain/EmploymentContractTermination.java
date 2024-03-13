@@ -13,7 +13,7 @@ public class EmploymentContractTermination {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_TOOLEPING_PEATAMINE")
-    public int id;
+    public Long id;
 
     // Mis töölepingu peatamisega on tegemist
     @JoinColumn(name = "ID_TOOLEPING")

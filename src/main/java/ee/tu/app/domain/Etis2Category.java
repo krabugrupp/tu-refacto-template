@@ -7,14 +7,14 @@ import java.util.Date;
 @Entity
 @Table(name = "IR_ETIS2_KATEGOORIA")
 @NoArgsConstructor
-public class ETIS2Category {
+public class Etis2Category {
 
     // Kategooria id. Viide ir_kategooria.id_kategooria peale
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_KATEGOORIA")
-    private int id;
+    private Long id;
 
     // Töösuhte kirje ETISe identifikaator.
     @Column(name = "GUID", length = 36)

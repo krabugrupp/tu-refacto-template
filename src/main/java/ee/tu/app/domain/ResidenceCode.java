@@ -16,7 +16,7 @@ public class ResidenceCode {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_ASUMIKOOD")
-    public int id;
+    public Long id;
 
     @Column(name = "KL_LIIK")
     public int ehakClassifierCode = 220;

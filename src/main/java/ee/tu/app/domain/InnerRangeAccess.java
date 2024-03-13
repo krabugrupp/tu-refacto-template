@@ -13,7 +13,7 @@ public class InnerRangeAccess {
     @SequenceGenerator(name = "sequenceGenerator")
 
     @Column(name = "IR_INNERRANGE_ACCESS_ID", nullable = false)
-    public int id;
+    public Long id;
 
     // Basic auth kasutaja
     @Column(name = "USER_NAME", length = 20)

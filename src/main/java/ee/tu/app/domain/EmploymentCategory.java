@@ -15,7 +15,7 @@ public class EmploymentCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_KATEGOORIA")
-    public int id;
+    public Long id;
 
     // Töölepingu tüüp klassifikaatorist 103
     @Column(name = "ID_POHIKLASS")

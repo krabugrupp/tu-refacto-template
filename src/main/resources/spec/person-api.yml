@@ -4,27 +4,255 @@ info:
   version: 1.0.0
 
 servers:
-  - url: http://localhost:8080/api/persion
+  - url: http://localhost:8080/api/persons
 
 tags:
   - name: person
 
 paths:
+  /{personUuid}/details/bank:
+    post:
+      tags:
+        - person
+      summary: Create bank details for a person
+      operationId: postPersonDetailsBank
+      parameters:
+        - name: personUuid
+          in: path
+          description: UUID of the person
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BankAccount'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Request parameter or payload contains an invalid value.
 
-  /:
+  /{personUuid}/contacts:
     get:
       tags:
         - person
-      summary: Person test
-      operationId: getPerson
+      summary: Get contacts for a person
+      operationId: getPersonContacts
+      parameters:
+        - name: personUuid
+          in: path
+          description: UUID of the person
+          required: true
+          schema:
+            type: string
       responses:
         '200':
-          description: Приветствие
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: 'util-api.yml#/components/schemas/ContactInfo'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+    post:
+      tags:
+        - person
+      summary: Update contacts for a person
+      operationId: updatePersonContacts
+      parameters:
+        - name: personUuid
+          in: path
+          description: UUID of the person
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'util-api.yml#/components/schemas/ContactInfoUpdateRequest'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Request parameter or payload contains an invalid value.
+  /search:
+    post:
+      tags:
+        - person
+      summary: Search for persons
+      operationId: searchPersons
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /{personUuid}:
+    get:
+      tags:
+        - person
+      summary: Get information about a person
+      operationId: getPersonInfo
+      parameters:
+        - name: personUuid
+          in: path
+          description: UUID of the person
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /{personUuid}/work:
+    get:
+      tags:
+        - person
+      summary: Get work relations for a person
+      operationId: getPersonWorkRelations
+      parameters:
+        - name: personUuid
+          in: path
+          description: UUID of the person
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: 'institution-api.yml#/components/schemas/WorkRelation'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /{personUuid}/education:
+    get:
+      tags:
+        - person
+      summary: Get education details for a person
+      operationId: getPersonEducation
+      parameters:
+        - name: personUuid
+          in: path
+          description: UUID of the person
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: 'institution-api.yml#/components/schemas/Education'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /{personUuid}/details:
+    get:
+      tags:
+        - person
+      summary: Get details for a person
+      operationId: getPersonDetails
+      parameters:
+        - name: personUuid
+          in: path
+          description: UUID of the person
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/PersonDetails'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /{personUuid}/account:
+    get:
+      tags:
+        - person
+      summary: Get account information for a person
+      operationId: getPersonAccountInfo
+      parameters:
+        - name: personUuid
+          in: path
+          description: UUID of the person
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/UserAccountInfo'
+        '400':
+          description: Request parameter or payload contains an invalid value
+
+  /registry/validate:
+    get:
+      tags:
+        - person-registry
+      summary: Validate person registry
+      operationId: validatePersonRegistry
+      parameters:
+        - name: params
+          in: query
+          description: Additional parameters for validation
+          required: true
+          schema:
+            type: object
+            properties:
+              additionalProp1:
+                type: string
+              additionalProp2:
+                type: string
+              additionalProp3:
+                type: string
+      responses:
+        '200':
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Person'
-
+                $ref: '#/components/schemas/HasExistingAccountResponse'
+        '400':
+          description: Request parameter or payload contains an invalid value.
 
 components:
   schemas:
@@ -68,7 +296,7 @@ components:
         personalId:
           type: string
         person:
-          $ref: 'person-api.yml#/components/schemas/Person'
+          $ref: '#/components/schemas/Person'
 
     GraphQLQuery:
       type: object
@@ -180,6 +408,7 @@ components:
           type: string
         structuralUnitName:
           $ref: 'util-api.yml#/components/schemas/Translations'
+
 
     UserAccountInfo:
       type: object

@@ -20,7 +20,7 @@ public class PersonAttribute {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    public int id;
+    public Long id;
 
     // Millise isiku kohta käib tunnus
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

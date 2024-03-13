@@ -12,7 +12,7 @@ public class Nickname {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_ETIS2_UUENDADA")
-    public int id;
+    public Long id;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ISIK", nullable = false)

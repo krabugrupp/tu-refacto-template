@@ -12,7 +12,7 @@ public class PersonAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID")
-    public int id;
+    public Long id;
 
     // Isiku uuid mis kantakse hiljem ka IR_ISIK baasi kui tekkib ametlik konto
     @Column(name = "UUID", length = 36, nullable = false)

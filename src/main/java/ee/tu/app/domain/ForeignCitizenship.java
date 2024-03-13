@@ -14,7 +14,7 @@ public class ForeignCitizenship {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_KODAKONDSUS_IK")
-    public int identityId;
+    public Long identityId;
 
     // Millise isiku isikukoodiga on tegemist
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

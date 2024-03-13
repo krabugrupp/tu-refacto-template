@@ -13,7 +13,7 @@ public class InstitutionRelation {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_ASUTUS_SUHE")
-    public int id;
+    public Long id;
 
     // todo ?
     @Column(name = "ID_ASUTUS_EELLANE")

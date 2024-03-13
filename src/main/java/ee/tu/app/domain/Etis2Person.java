@@ -9,14 +9,14 @@ import java.util.Date;
 @Entity
 @Table(name = "IR_ETIS2_ISIK")
 @NoArgsConstructor
-public class ETIS2Person {
+public class Etis2Person {
 
     // Isiku id. Viide ir_isik.id_isik peale
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_ISIK")
-    public int id;
+    public Long id;
 
     // Isiku kirje ETISe identifikaator.
     @Column(name = "GUID", length = 36)

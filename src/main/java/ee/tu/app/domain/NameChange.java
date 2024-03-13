@@ -11,7 +11,7 @@ public class NameChange {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_NIMI")
-    public int id;
+    public Long id;
 
     // Mis isiku nimega on tegemist
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

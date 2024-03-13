@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "IR_AXAPTA_TEISENDUS")
 @NoArgsConstructor
-public class AXAPTATransformation {
+public class AxaptaTransformation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_AXAPTA_TEISENDUS")
-    public int id;
+    public Long id;
 
     @Column(name = "LIIK", length = 50, nullable = false)
     public String category;

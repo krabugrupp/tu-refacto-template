@@ -12,7 +12,7 @@ import java.util.Date;
 public class DuplicatePersonsLog {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    public int id;
+    public Long id;
 
     //  Vana isiku ID
     @JoinColumn(name = "ID_ISIK_VANA")

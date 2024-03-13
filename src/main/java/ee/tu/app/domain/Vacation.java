@@ -13,7 +13,7 @@ public class Vacation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    public int id;
+    public Long id;
     
     // Millise töölepingu küljes antud puhkus on
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

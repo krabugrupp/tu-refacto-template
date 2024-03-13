@@ -14,7 +14,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_ISIK", nullable = false)
-    public int id;
+    public Long id;
 
     // Isiku eesnimi
     @Column(name = "E_NIMI", length = 100)

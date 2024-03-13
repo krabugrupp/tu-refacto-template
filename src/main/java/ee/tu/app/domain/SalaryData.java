@@ -14,7 +14,7 @@ public class SalaryData {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_PALGAASTE")
-    public int id;
+    public Long id;
 
     // Millise töölepingu rea küljes antud palgaaste on
     @JoinColumn(name = "ID_KATEGOORIA")

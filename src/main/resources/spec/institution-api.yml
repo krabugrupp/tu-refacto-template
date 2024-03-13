@@ -4,25 +4,115 @@ info:
   version: 1.0.0
 
 servers:
-  - url: http://localhost:8080/api/institution
+  - url: http://localhost:8080/api/edu-institution
 
 tags:
-  - name: institution
+  - name: edu-institution
 
 paths:
+
   /:
     get:
       tags:
-        - degree
-      summary: Degree test
-      operationId: getDegree
+        - edu-institution
+      summary: Get all educational institutions
+      operationId: getAllEducationalInstitutions
       responses:
         '200':
-          description: Приветствие
+          description: OK
           content:
-            application/json:
+            application/json;charset=UTF-8:
               schema:
-                $ref: '#/components/schemas/Degree'
+                type: array
+                items:
+                  $ref: '#/components/schemas/EduInstitution'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /{id}:
+    get:
+      tags:
+        - edu-institution
+      summary: Get educational institution by ID
+      operationId: getEducationalInstitutionById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the educational institution
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/EduInstitution'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /et:
+    get:
+      tags:
+        - edu-institution
+      summary: Get educational institution names in Estonian
+      operationId: getEducationalInstitutionNamesInEstonian
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /en:
+    get:
+      tags:
+        - edu-institution
+      summary: Get educational institution names in English
+      operationId: getEducationalInstitutionNamesInEnglish
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
+  /search:
+    post:
+      tags:
+        - edu-institution
+      summary: Search for educational institutions
+      operationId: searchEducationalInstitutions
+      requestBody:
+        required: true
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/EduInstitutionSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EduInstitution'
+        '400':
+          description: Request parameter or payload contains an invalid value.
+
 
 components:
   schemas:
@@ -128,154 +218,6 @@ components:
           maximum: 300
         type:
           $ref: 'util-api.yml#/components/schemas/Classificator'
-    LocationData:
-      type: object
-      properties:
-        code:
-          type: string
-        name:
-          $ref: 'util-api.yml#/components/schemas/Translations'
-        parentCode:
-          type: string
-        type:
-          $ref: 'util-api.yml#/components/schemas/Classificator'
-        validUntil:
-          type: string
-    StructuralUnitData:
-      type: object
-      properties:
-        academic:
-          type: boolean
-        address:
-          type: string
-        city:
-          type: string
-        code:
-          type: string
-        email:
-          type: string
-        level:
-          type: integer
-          format: int32
-        name:
-          $ref: 'util-api.yml#/components/schemas/Translations'
-        parentUnitId:
-          type: integer
-          format: int32
-        phone:
-          type: string
-        supportsContinuousLearning:
-          type: boolean
-        validSince:
-          type: string
-        validUntil:
-          type: string
-        webpageUrl:
-          type: string
-        zip:
-          type: string
-    StructuralUnitSearchRequest_Search:
-      type: object
-      properties:
-        code:
-          type: string
-          maxLength: 40
-          minLength: 2
-        is_academic:
-          type: boolean
-        is_training:
-          type: boolean
-        level:
-          type: integer
-          maximum: 10
-          minimum: 1
-        name:
-          type: string
-          maxLength: 40
-          minLength: 2
-        q:
-          type: string
-          maxLength: 40
-          minLength: 2
-        start:
-          type: integer
-          minimum: 1
-        take:
-          type: integer
-          maximum: 300
-          minimum: 1
-    StructuralUnit_Public:
-      type: object
-      properties:
-        academic:
-          type: boolean
-        address:
-          type: string
-        city:
-          type: string
-        code:
-          type: string
-        email:
-          type: string
-        is_expired:
-          type: boolean
-        level:
-          type: integer
-          format: int32
-        name:
-          $ref: 'util-api.yml#/components/schemas/Translations_Public'
-        parentCode:
-          type: string
-        phone:
-          type: string
-        supportsContinuousLearning:
-          type: boolean
-        webpageUrl:
-          type: string
-        zip:
-          type: string
-    StructuralUnit_Search:
-      type: object
-      properties:
-        academic:
-          type: boolean
-        address:
-          type: string
-        city:
-          type: string
-        code:
-          type: string
-        email:
-          type: string
-        is_expired:
-          type: boolean
-        level:
-          type: integer
-          format: int32
-        name:
-          $ref: 'util-api.yml#/components/schemas/Translations_Search'
-        parentCode:
-          type: string
-        phone:
-          type: string
-        supportsContinuousLearning:
-          type: boolean
-        webpageUrl:
-          type: string
-        zip:
-          type: string
-    StudyDuration:
-      type: object
-      properties:
-        beginningYear:
-          type: integer
-          format: int32
-        endYear:
-          type: integer
-          format: int32
-        durationYears:
-          type: integer
-          format: int32
     WorkRelation:
       type: object
       properties:

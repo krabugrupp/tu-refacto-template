@@ -12,7 +12,7 @@ public class Structure {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_STRUKTUUR")
-    public int id;
+    public Long id;
 
     // Viide ülemüksusele todo
     @Column(name = "ID_MASTER_STRUKTUUR")

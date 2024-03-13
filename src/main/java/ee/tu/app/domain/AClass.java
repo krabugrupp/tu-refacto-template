@@ -11,7 +11,7 @@ import java.util.Date;
 public class AClass {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    public int id;
+    public Long id;
 
     //Viide ülemklassifikaatorile (ei kasutata)
     @Column(name = "ID_KLASS")
