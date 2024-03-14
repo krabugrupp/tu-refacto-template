@@ -1,12 +1,11 @@
 package ee.tu.app.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "IR_LDAP")
 // Tartu Ülikooli keskses süsteemis kehtivad kasutajatunnused
 public class UserCredentials {
 

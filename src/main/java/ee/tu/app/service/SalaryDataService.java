@@ -2,8 +2,12 @@ package ee.tu.app.service;
 
 import ee.tu.app.domain.SalaryData;
 import ee.tu.app.repo.SalaryDataRepo;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
-public class SalaryDataService extends BaseService<SalaryData, SalaryDataRepo> {
+@Service
+@Transactional
+public class SalaryDataService extends BaseService<SalaryData> {
 
     public SalaryDataService(SalaryDataRepo repository) {
         super(repository);

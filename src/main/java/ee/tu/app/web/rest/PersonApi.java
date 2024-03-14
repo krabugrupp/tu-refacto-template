@@ -19,18 +19,6 @@ public class PersonApi implements PersonApiDelegate {
 
 
 
-    @Override
-    public ResponseEntity<XRPerson> getPerson() {
-        log.info("Get resource was requested");
-        XRPerson person = new XRPerson();
-        person.setId(1L);
-        person.setFirstName("Peeter");
-        person.setLastName("Peetrovi4");
-
-        person.setUuid("uuid1");
-
-        return ResponseEntity.ok(person);
-    }
 }
 
 

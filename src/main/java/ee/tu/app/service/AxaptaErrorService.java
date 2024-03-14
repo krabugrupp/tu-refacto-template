@@ -7,7 +7,7 @@ import ee.tu.app.repo.AxaptaErrorRepo;
 
 @Service
 @Transactional
-public class AxaptaErrorService extends BaseService<AxaptaError, AxaptaErrorRepo> {
+public class AxaptaErrorService extends BaseService<AxaptaError> {
 
     public AxaptaErrorService(AxaptaErrorRepo repository) {
         super(repository);

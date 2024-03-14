@@ -251,3 +251,15 @@ components:
           $ref: 'util-api.yml#/components/schemas/Classificator'
         title:
           $ref: 'util-api.yml#/components/schemas/Translations'
+    StudyDuration:
+      type: object
+      properties:
+        beginningYear:
+          type: integer
+          format: int32
+        endYear:
+          type: integer
+          format: int32
+        durationYears:
+          type: integer
+          format: int32

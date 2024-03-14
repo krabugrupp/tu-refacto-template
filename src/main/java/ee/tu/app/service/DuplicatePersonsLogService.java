@@ -2,8 +2,12 @@ package ee.tu.app.service;
 
 import ee.tu.app.domain.DuplicatePersonsLog;
 import ee.tu.app.repo.DuplicatePersonsLogRepo;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
-public class DuplicatePersonsLogService extends BaseService<DuplicatePersonsLog, DuplicatePersonsLogRepo> {
+@Service
+@Transactional
+public class DuplicatePersonsLogService extends BaseService<DuplicatePersonsLog> {
 
     public DuplicatePersonsLogService(DuplicatePersonsLogRepo repository) {
         super(repository);

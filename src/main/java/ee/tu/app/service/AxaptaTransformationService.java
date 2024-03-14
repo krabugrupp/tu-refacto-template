@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-public class AxaptaTransformationService extends BaseService<AxaptaTransformation, AxaptaTransformationRepo>{
+public class AxaptaTransformationService extends BaseService<AxaptaTransformation>{
 
     public AxaptaTransformationService(AxaptaTransformationRepo repository) {
         super(repository);

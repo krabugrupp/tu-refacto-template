@@ -2,8 +2,12 @@ package ee.tu.app.service;
 
 import ee.tu.app.domain.Vacation;
 import ee.tu.app.repo.VacationRepo;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
-public class VacationService extends BaseService<Vacation, VacationRepo> {
+@Service
+@Transactional
+public class VacationService extends BaseService<Vacation> {
 
     public VacationService(VacationRepo repository) {
         super(repository);

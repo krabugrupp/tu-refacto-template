@@ -334,7 +334,7 @@ paths:
       tags:
         - location
       summary: Get all locations within a country
-      operationId: getAllLocationsInCountry
+      operationId: getAllLocationsByCountryAndLocation
       parameters:
         - name: countryCode
           in: path
@@ -390,7 +390,7 @@ paths:
       tags:
         - location
       summary: Get all locations within a country
-      operationId: getAllLocationsInCountry
+      operationId: getAllLocationsByCountry
       parameters:
         - name: countryCode
           in: path
@@ -721,18 +721,7 @@ components:
           type: string
         zip:
           type: string
-    StudyDuration:
-      type: object
-      properties:
-        beginningYear:
-          type: integer
-          format: int32
-        endYear:
-          type: integer
-          format: int32
-        durationYears:
-          type: integer
-          format: int32
+
     Translations:
       type: object
       properties:

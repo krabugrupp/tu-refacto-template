@@ -3,8 +3,12 @@ package ee.tu.app.service;
 
 import ee.tu.app.domain.PersonAttribute;
 import ee.tu.app.repo.PersonAttributeRepo;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
-public class PersonAttributeService extends BaseService<PersonAttribute, PersonAttributeRepo> {
+@Service
+@Transactional
+public class PersonAttributeService extends BaseService<PersonAttribute> {
 
     public PersonAttributeService(PersonAttributeRepo repository) {
         super(repository);

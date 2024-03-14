@@ -2,8 +2,10 @@ package ee.tu.app.service;
 
 import ee.tu.app.domain.Country;
 import ee.tu.app.repo.CountryRepo;
+import org.springframework.stereotype.Service;
 
-public class CountryService extends BaseService<Country, CountryRepo> {
+@Service
+public class CountryService extends BaseService<Country> {
 
 
     public CountryService(CountryRepo repository) {

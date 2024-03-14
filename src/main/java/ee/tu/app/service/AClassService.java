@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-public class AClassService extends BaseService<AClass, AClassRepo> {
+public class AClassService extends BaseService<AClass> {
 
     public AClassService(AClassRepo repository) {
         super(repository);

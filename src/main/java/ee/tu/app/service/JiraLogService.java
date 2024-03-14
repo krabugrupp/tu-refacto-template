@@ -3,8 +3,12 @@ package ee.tu.app.service;
 
 import ee.tu.app.domain.JiraLog;
 import ee.tu.app.repo.JiraLogRepo;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
-public class JiraLogService extends BaseService<JiraLog, JiraLogRepo> {
+@Service
+@Transactional
+public class JiraLogService extends BaseService<JiraLog> {
 
 
     public JiraLogService(JiraLogRepo repository) {

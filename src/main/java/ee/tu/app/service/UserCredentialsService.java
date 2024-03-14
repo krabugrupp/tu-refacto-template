@@ -3,8 +3,13 @@ package ee.tu.app.service;
 
 import ee.tu.app.domain.UserCredentials;
 import ee.tu.app.repo.UserCredentialsRepo;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
-public class UserCredentialsService extends BaseService<UserCredentials, UserCredentialsRepo> {
+
+@Service
+@Transactional
+public class UserCredentialsService extends BaseService<UserCredentials> {
 
     public UserCredentialsService(UserCredentialsRepo repository) {
         super(repository);

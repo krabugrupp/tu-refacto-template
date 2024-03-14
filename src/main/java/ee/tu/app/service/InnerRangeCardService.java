@@ -1,8 +1,11 @@
 package ee.tu.app.service;
 
-public class InnerRangeCardService extends BaseService<InnerRangeUser, InnerRangeUser> {
+import ee.tu.app.domain.InnerRangeUser;
+import ee.tu.app.repo.InnerRangeUserRepo;
 
-    public InnerRangeCardService(InnerRangeUser repository) {
+public class InnerRangeCardService extends BaseService<InnerRangeUser> {
+
+    public InnerRangeCardService(InnerRangeUserRepo repository) {
         super(repository);
     }
 }

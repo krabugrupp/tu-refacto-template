@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-public class ContactService extends BaseService<Contact, ContactRepo> {
+public class ContactService extends BaseService<Contact> {
 
 
     public ContactService(ContactRepo repository) {

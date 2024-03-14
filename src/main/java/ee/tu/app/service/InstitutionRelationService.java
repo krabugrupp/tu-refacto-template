@@ -2,9 +2,12 @@ package ee.tu.app.service;
 
 import ee.tu.app.domain.InstitutionRelation;
 import ee.tu.app.repo.InstitutionRelationRepo;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
-
-public class InstitutionRelationService extends BaseService<InstitutionRelation, InstitutionRelationRepo> {
+@Service
+@Transactional
+public class InstitutionRelationService extends BaseService<InstitutionRelation> {
 
 
     public InstitutionRelationService(InstitutionRelationRepo repository) {

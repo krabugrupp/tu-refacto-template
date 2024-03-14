@@ -153,11 +153,38 @@ task generateUtilApi (type: GenerateTask) {
 			userSpringBoot3: "true"
 	])
 }
+task generateInstitutionApi (type: GenerateTask) {
+	getGeneratorName().set("spring")
+
+	getInputSpec().set("$projectDir/src/main/resources/spec/institution-api.yml")
+	getOutputDir().set("$buildDir/generated/api".toString())
+	getApiPackage().set("ee.tu.app.api")
+	getModelPackage().set("ee.tu.app.api.model")
+	getModelNamePrefix().set("XR")
+	getSkipValidateSpec().set(false)
+	getApiFilesConstrainedTo().set([""])
+	getModelFilesConstrainedTo().set([""])
+	getSupportingFilesConstrainedTo().set(["ApiUtil.java"])
+	getConfigOptions().set([
+			generateSupportingFiles: "false",
+			dateLibrary: "java8",
+			delegatePattern: "true",
+			title: "tu-app",
+			useTags: "true",
+			oas3: "true",
+			useSpringController: "true",
+			useSpringfox: "false",
+			userSpringBoot3: "true"
+	])
+}
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
+compileJava.dependsOn generatePersonApi
+compileJava.dependsOn generateUtilApi
+compileJava.dependsOn generateInstitutionApi
 
 //  4to bi udaljat spring boot app который создается и мешает
 tasks.openApiGenerate.doLast {

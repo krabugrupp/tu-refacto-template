@@ -2,8 +2,12 @@ package ee.tu.app.service;
 
 import ee.tu.app.domain.NameChange;
 import ee.tu.app.repo.NameChangeRepo;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
-public class NameChangeService extends BaseService<NameChange, NameChangeRepo> {
+@Service
+@Transactional
+public class NameChangeService extends BaseService<NameChange> {
 
     public NameChangeService(NameChangeRepo repository) {
         super(repository);
