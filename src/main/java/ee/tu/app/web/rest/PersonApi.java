@@ -2,6 +2,7 @@ package ee.tu.app.web.rest;
 
 import ee.tu.app.api.PersonApiDelegate;
 import ee.tu.app.api.model.*;
+import ee.tu.app.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,12 @@ import java.util.List;
 @Component
 @Slf4j
 public class PersonApi implements PersonApiDelegate {
+
+    private final PersonService personService;
+
+    public PersonApi(PersonService personService) {
+        this.personService = personService;
+    }
 
     @Override
     public ResponseEntity<XRUserAccountInfo> getPersonAccountInfo(String personUuid) {
@@ -38,6 +45,7 @@ public class PersonApi implements PersonApiDelegate {
     @Override
     public ResponseEntity<XRPerson> getPersonInfo(String personUuid) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+//        return personService.getPersonByUuid(personUuid);
     }
 
     @Override

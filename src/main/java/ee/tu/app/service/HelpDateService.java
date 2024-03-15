@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class HelpDateService extends BaseService<HelpDate> {
 
-
     public HelpDateService(HelpDateRepo repository) {
         super(repository);
     }

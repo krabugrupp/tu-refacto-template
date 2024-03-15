@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class ForeignCitizenshipService extends BaseService<ForeignCitizenship> {
 
-
     public ForeignCitizenshipService(ForeignCitizenshipRepo repository) {
         super(repository);
     }
