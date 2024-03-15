@@ -67,7 +67,7 @@ public class Person {
 
     //Isiku unikaalne ja avalik UUID [ÕIS2]
     @Column(name = "UUID", length = 40)
-    public String guid;
+    public String uuid;
 
     // FO isiku id, muudetakse ainult fo-ir liidese kaudu
     @Column(name = "EMPLID", length = 20)

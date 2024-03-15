@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public abstract class BaseService<TClass> implements IBaseService<TClass> {
 
-    private final IBaseRepo<TClass, Long> repository;
+    public final IBaseRepo<TClass, Long> repository;
 
     public BaseService(IBaseRepo<TClass, Long> repository) {
         this.repository = repository;
@@ -22,7 +22,6 @@ public abstract class BaseService<TClass> implements IBaseService<TClass> {
 
     public Optional<TClass> get(Long id){
         return (Optional<TClass>) repository.findById(id);
-
     }
 
     @Transactional
@@ -37,7 +36,6 @@ public abstract class BaseService<TClass> implements IBaseService<TClass> {
 
     @Transactional
     public void delete(Long id){
-        //check if object with this id exists
         get(id);
         repository.deleteById(id);
     }
