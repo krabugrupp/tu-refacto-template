@@ -492,7 +492,7 @@ components:
         addresses:
           type: array
           items:
-            $ref: '#/components/schemas/Translations'
+            $ref: '#/components/schemas/Address'
 
     ContactDevice:
       type: object
