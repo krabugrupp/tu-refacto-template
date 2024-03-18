@@ -1,10 +1,15 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 // todo whats todo here
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_ETIS2_KATEGOORIA")
 @NoArgsConstructor
 public class Etis2Category {

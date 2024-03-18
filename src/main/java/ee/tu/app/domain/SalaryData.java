@@ -1,12 +1,14 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_PALGAASTE")
 public class SalaryData {
 
@@ -14,23 +16,23 @@ public class SalaryData {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_PALGAASTE")
-    public Long id;
+    private Long id;
 
     // Millise töölepingu rea küljes antud palgaaste on
     @JoinColumn(name = "ID_KATEGOORIA")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    public EmploymentCategory employmentCategory;
+    private EmploymentCategory employmentCategory;
 
     // Palgaastme väärtus
     @Column(name = "PALGAASTE")
-    public int salary;
+    private int salary;
 
     // Palgaastme kehtivuse algus
     @Column(name = "ALGUS_KP")
-    public Date startDate;
+    private Date startDate;
 
     // Palgaastme kehtivuse lõpp
     @Column(name = "LOPP_KP")
-    public Date endDate;
+    private Date endDate;
 
 }

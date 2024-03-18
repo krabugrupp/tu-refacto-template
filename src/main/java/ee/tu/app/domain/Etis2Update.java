@@ -1,11 +1,15 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 // todo whats todo here
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_ETIS2_UUENDADA")
 @NoArgsConstructor
 public class Etis2Update {
@@ -15,22 +19,22 @@ public class Etis2Update {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    public Long id;
+    private Long id;
     // Isiku id. Viide ir_isik.id_isik peale
 
     @Column(name = "ID_ISIK", nullable = false)
-    public int personId;
+    private int personId;
 
     // Kategooria id. Viide ir_kategooria.id_kategooria peale
     @Column(name = "ID_KATEGOORIA", nullable = false)
-    public int categoryId;
+    private int categoryId;
 
     // 1 - kui uuendamine ei õnnestunud, muidu NULL
     @Column(name = "KAS_VIGA")
-    public int errorStatus;
+    private int errorStatus;
 
     // Lisamise aeg
     @Column(name = "AEG")
-    public Date createdAt;
+    private Date createdAt;
 
 }

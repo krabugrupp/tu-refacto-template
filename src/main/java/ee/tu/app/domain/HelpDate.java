@@ -1,11 +1,15 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 // Abitabel kuupäevadega seotud päringute jaoks
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_KUUPAEV")
 public class HelpDate {
 
@@ -13,7 +17,7 @@ public class HelpDate {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_KONTAKTIVAHEND")
-    public Long id;
+    private Long id;
 
     // Kuupäev
     @Column(name = "KUUPAEV")

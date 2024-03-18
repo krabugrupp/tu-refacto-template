@@ -1,7 +1,9 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /*
 todo 2 PK
@@ -14,18 +16,20 @@ PK_IR_ISIK_TUNNUS
 ID_ISIK, TUNNU
  */
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_ISIK_TUNNUS")
 @NoArgsConstructor
 public class PersonAttribute {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    public Long id;
+    private Long id;
 
     // Millise isiku kohta käib tunnus
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ISIK")
-    public Person person;
+    private Person person;
 
     /*
     Mis tunnusega täpselt tegu :
@@ -38,9 +42,9 @@ public class PersonAttribute {
     - kuvatav_nimi: isiku display name, mida näidatakse mailhost'i ja exchange'i kaudu kirja saates saatja nimena
      */
     @Column(name = "TUNNUS", length = 20)
-    public String attribute;
+    private String attribute;
 
     // Antud isiku antud tunnuse väärtus. Enamasti seda ei vaadata (väärtuseks on "1") . Tunnuse "ldap_number" korral on siin ka identifikaatori väärtus
     @Column(name = "VAARTUS", length = 200)
-    public String value;
+    private String value;
 }

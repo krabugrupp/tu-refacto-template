@@ -1,12 +1,16 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import java.util.Date;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_INNERRANGE_USER")
 @NoArgsConstructor
 public class InnerRangeUser {
@@ -14,41 +18,41 @@ public class InnerRangeUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID", nullable = false)
-    public Long id;
+    private Long id;
 
     // Kasutaja isikukood
     @Column(name = "ISIKUKOOD", length = 100)
-    public String personalCode;
+    private String personalCode;
 
     // Kasutaja eesnimi
     @Column(name = "FIRST_NAME", length = 100)
-    public String firstName;
+    private String firstName;
 
     // Kasutaja perekonnanimi
     @Column(name = "SECOND_NAME", length = 100)
-    public String lastName;
+    private String lastName;
 
     // Kasutaja töötõendi/kaardi number
     @Column(name = "TOOTOENDIKAARDI_NUMBER", length = 50)
-    public String workCardNumber;
+    private String workCardNumber;
 
     // Kasutaja allüksus/asutus
     @Column(name = "ALLUKSUSASUTUS", length = 100)
-    public String institutionName;
+    private String institutionName;
 
     // Kasutaja ametikoht
     @Column(name = "AMETIKOHT", length = 100)
-    public String position;
+    private String position;
 
     // Kasutaja on tühistatud
     @Column(name = "USER_CANCELLED")
-    public boolean cancelled;
+    private boolean cancelled;
 
     // Kasutaja on aegunud
     @Column(name = "USER_EXPIRED")
-    public boolean expired;
+    private boolean expired;
 
     // Rea viimase muutmise aeg
     @Column(name = "LOADING_DATE")
-    public Date loadingDate;
+    private Date loadingDate;
 }

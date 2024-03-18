@@ -1,9 +1,13 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_ETIS2_UUENDADA")
 @NoArgsConstructor
 public class Nickname {
@@ -12,15 +16,15 @@ public class Nickname {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_ETIS2_UUENDADA")
-    public Long id;
+    private Long id;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ISIK", nullable = false)
-    public Person person;
+    private Person person;
 
     @Column(name = "EESNIMI", nullable = false, length = 100)
-    public String firstName;
+    private String firstName;
 
     @Column(name = "PERENIMI", nullable = false, length = 100)
-    public String lastName;
+    private String lastName;
 }

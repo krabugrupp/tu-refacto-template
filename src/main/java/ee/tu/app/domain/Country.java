@@ -1,12 +1,16 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "IR_MAAD")
 public class Country {
 
@@ -14,47 +18,47 @@ public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_MAAD")
-    public Long id;
+    private Long id;
 
     // Ei kasutata todo delete?
     @Column(name = "MASTER")
-    public int master;
+    private int master;
 
     // Maa nimi
     @Column(name = "NIMI", length = 50)
-    public String name;
+    private String name;
 
     // Maa pealinn, ei kasutata todo delete?
     @Column(name = "PEALINN", length = 50)
-    public String capitalCity;
+    private String capitalCity;
 
     // Maa ISO2 kood
     @Column(name = "ISO2", length = 2)
-    public String iso2;
+    private String iso2;
 
     // Maa ISO3 kood
     @Column(name = "ISO3", length = 5)
-    public String iso3;
+    private String iso3;
 
     // Maa ISO numbriline kood
     @Column(name = "ISONUM")
-    public int isoNumeric;
+    private int isoNumeric;
 
     // Maa nimetus inglise keeles
     @Column(name = "NIMI_IK", length = 100)
-    public String nameEn;
+    private String nameEn;
 
     // Rea viimase muutmise teinud arvuti IP aadress. Kui muutus tehti baasist, siis ip ja kasutajatunnus
     @Column(name = "URL", length = 50)
-    public String updatedByUrl;
+    private String updatedByUrl;
 
     // Rea viimase muutja ID_ISIK. Täidetakse logitrigeri poolt
     @Column(name = "KID")
-    public String updatedByPerson;
+    private String updatedByPerson;
 
     // Rea viimase muutmise aeg. Täidetakse logitrigeri poolt
     @Column(name = "AEG")
-    public Date updatedAt;
+    private Date updatedAt;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "country")
     private List<ResidenceCode> residenceCodeList = new ArrayList<>();

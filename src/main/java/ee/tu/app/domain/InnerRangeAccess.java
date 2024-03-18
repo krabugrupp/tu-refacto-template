@@ -1,10 +1,14 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 // todo ????? key?? whats' that
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_INNERRANGE_ACCESS")
 @NoArgsConstructor
 public class InnerRangeAccess {
@@ -13,19 +17,19 @@ public class InnerRangeAccess {
     @SequenceGenerator(name = "sequenceGenerator")
 
     @Column(name = "IR_INNERRANGE_ACCESS_ID", nullable = false)
-    public Long id;
+    private Long id;
 
     // Basic auth kasutaja
     @Column(name = "USER_NAME", length = 20)
-    public String userName;
+    private String userName;
 
 
     // Basic auth parool
     @Column(name = "PASSWORD", length = 20)
-    public  String password;
+    private  String password;
 
     //API key
     @Column(name = "API_KEY", length = 30)
-    public  String apiKey;
+    private  String apiKey;
 
 }

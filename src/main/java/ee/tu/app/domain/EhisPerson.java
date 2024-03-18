@@ -1,11 +1,15 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_EHIS_ISIK")
 @NoArgsConstructor
 public class EhisPerson {
@@ -13,15 +17,15 @@ public class EhisPerson {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_ISIK")
-    public Long id;
+    private Long id;
 
     @Column(name = "AEG")
-    public Date date;
+    private Date date;
 
     @Column(name = "VEATEKST", length = 2000)
-    public String text;
+    private String text;
 
     // Todo make it some CLOB
     @Column(name = "VASTUS_XML")
-    public String sessionCode;
+    private String sessionCode;
 }

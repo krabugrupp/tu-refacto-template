@@ -1,11 +1,15 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_ASUTUS_SUHE")
 @NoArgsConstructor
 public class InstitutionRelation {
@@ -13,25 +17,25 @@ public class InstitutionRelation {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_ASUTUS_SUHE")
-    public Long id;
+    private Long id;
 
     // todo ?
     @Column(name = "ID_ASUTUS_EELLANE")
-    public int firstInstitution;
+    private int firstInstitution;
     // todo ?
     @Column(name = "ID_ASUTUS_JARGLANE")
-    public int secondInstitution;
+    private int secondInstitution;
 
     // Rea viimase muutmise teinud arvuti IP aadress. Kui muutus tehti baasist, siis ip ja kasutajatunnus
     @Column(name = "URL", length = 50)
-    public String updatedByUrl;
+    private String updatedByUrl;
 
     // Rea viimase muutja ID_ISIK. Täidetakse logitrigeri poolt
     @Column(name = "KID")
-    public String updatedByPerson;
+    private String updatedByPerson;
 
     // Rea viimase muutmise aeg. Täidetakse logitrigeri poolt
     @Column(name = "AEG")
-    public Date updatedAt;
+    private Date updatedAt;
 
 }

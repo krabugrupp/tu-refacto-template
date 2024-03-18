@@ -1,10 +1,14 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_KEEL")
 public class LanguageLevel {
 
@@ -12,39 +16,39 @@ public class LanguageLevel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_KEEL")
-    public Long id;
+    private Long id;
 
     // Mis isiku keeleoskusega on tegemist
     @JoinColumn(name = "ID_ISIK")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    public Person person;
+    private Person person;
 
     // Keel klassifikaatorist 2
     @Column(name = "KL_KEEL", nullable = false)
-    public int language;
+    private int language;
 
 
     // Keele kõnelemise tase klassifikaatorist 320
     @Column(name = "KL_TASE_KONE", nullable = false)
-    public int speakingLevel;
+    private int speakingLevel;
 
     // Keele kirjutamise tase klassifikaatorist 320
     @Column(name = "KL_TASE_KIRI", nullable = false)
-    public int writingLevel;
+    private int writingLevel;
 
     // Keele lugemise tase klassifikaatorist 320
     @Column(name = "KL_TASE_LOEB", nullable = false)
-    public int readingLevel;
+    private int readingLevel;
 
     // Rea viimase muutmise teinud arvuti IP aadress. Kui muutus tehti baasist, siis ip ja kasutajatunnus
     @Column(name = "URL", length = 50)
-    public String updatedByUrl;
+    private String updatedByUrl;
 
     // Rea viimase muutja ID_ISIK. Täidetakse logitrigeri poolt
     @Column(name = "KID")
-    public String updatedByPerson;
+    private String updatedByPerson;
 
     // Rea viimase muutmise aeg. Täidetakse logitrigeri poolt
     @Column(name = "AEG")
-    public Date updatedAt;
+    private Date updatedAt;
 }

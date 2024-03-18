@@ -11,7 +11,7 @@ import java.util.List;
 public class ContactInfoDto {
 
   private List<ContactDeviceDto> devices;
-  private List<TranslationsDto> addresses;
+  private List<AddressDto> addresses;
 
 }
 

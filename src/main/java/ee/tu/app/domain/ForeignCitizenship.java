@@ -1,11 +1,15 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 // Isikute välisriikide isikukoodid
 @Entity
+@Setter
+@Getter
 @Table(name = "IR_KODAKONDSUS_IK")
 public class ForeignCitizenship {
 
@@ -14,52 +18,52 @@ public class ForeignCitizenship {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Column(name = "ID_KODAKONDSUS_IK")
-    public Long identityId;
+    private Long identityId;
 
     // Millise isiku isikukoodiga on tegemist
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ISIK", nullable = false)
-    public Person person;
+    private Person person;
 
     // Välisriigi isikukood
     @Column(name = "VISIKUKOOD", length = 100)
-    public String foreignIdentityCode;
+    private String foreignIdentityCode;
 
     // Ei kasutata todo delete?
     @Column(name = "ELAMISLUBA_ALGUS")
-    public Date residencePermitFrom;
+    private Date residencePermitFrom;
 
     // Ei kasutata todo delete?
     @Column(name = "ELAMISLUBA_LOPP")
-    public Date residencePermitTo;
+    private Date residencePermitTo;
 
     // Ei kasutata todo delete?
     @Column(name = "ELAMISLUBA_DOK")
-    public Date residencePermitDoc;
+    private Date residencePermitDoc;
 
     // Rea kehtivuse alguse kuupäev
     @Column(name = "ALGUS")
-    public Date startDate;
+    private Date startDate;
 
     // Rea kehtivuse lõppkuupäev
     @Column(name = "LOPP")
-    public Date endDate;
+    private Date endDate;
 
     // Rea viimase muutmise teinud arvuti IP aadress. Kui muutus tehti baasist, siis ip ja kasutajatunnus
     @Column(name = "URL", length = 50)
-    public String updatedByUrl;
+    private String updatedByUrl;
 
     // Rea viimase muutja ID_ISIK. Täidetakse logitrigeri poolt
     @Column(name = "KID")
-    public String updatedByPerson;
+    private String updatedByPerson;
 
     // Rea viimase muutmise aeg. Täidetakse logitrigeri poolt
     @Column(name = "AEG")
-    public Date updatedAt;
+    private Date updatedAt;
 
     //Mis riigi isikukoodiga tegemist on
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_MAAD", nullable = false)
-    public Country country;
+    private Country country;
 
 }

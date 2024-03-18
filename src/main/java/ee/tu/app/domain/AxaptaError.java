@@ -1,11 +1,15 @@
 package ee.tu.app.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "IR_AXAPTA_VEAD")
 @NoArgsConstructor
 public class AxaptaError {
@@ -13,14 +17,14 @@ public class AxaptaError {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "ID_AXAPTA_VEAD")
-    public Long id;
+    private Long id;
 
     @Column(name = "AEG")
-    public Date date;
+    private Date date;
 
     @Column(name = "TEKST", length = 4000)
-    public String text;
+    private String text;
 
     @Column(name = "SESSION_ID")
-    public int sessionCode;
+    private int sessionCode;
 }
