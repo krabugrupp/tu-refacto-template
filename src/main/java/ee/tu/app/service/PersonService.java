@@ -40,24 +40,24 @@ public class PersonService extends BaseService<Person> implements IPersonService
        }};
 
         for (Contact contact : person.getPersonContactList() ) {
-            if (ContactDevice.Email.getClassificator() == contact.contactCategory) {
-                personDto.setOfficialEmail(contact.value);
+            if (ContactDevice.Email.getClassificator() == contact.getContactCategory()) {
+                personDto.setOfficialEmail(contact.getValue());
 
             }
-            else if (ContactDevice.Fax.getClassificator() == contact.contactCategory) {
-                personDto.setOfficialFax(contact.value);
+            else if (ContactDevice.Fax.getClassificator() == contact.getContactCategory()) {
+                personDto.setOfficialFax(contact.getValue());
 
             }
-            else if (ContactDevice.WorkMobilePhone.getClassificator() == contact.contactCategory) {
-                personDto.setOfficialMobile(contact.value);
+            else if (ContactDevice.WorkMobilePhone.getClassificator() == contact.getContactCategory()) {
+                personDto.setOfficialMobile(contact.getValue());
 
             }
-            else if (ContactDevice.MobilePhone.getClassificator() == contact.contactCategory) {
-                personDto.setPersonalPhone(contact.value);
+            else if (ContactDevice.MobilePhone.getClassificator() == contact.getContactCategory()) {
+                personDto.setPersonalPhone(contact.getValue());
 
             }
-            else if (ContactDevice.HomePhone.getClassificator() == contact.contactCategory) {
-                personDto.setPersonalPhone(contact.value);
+            else if (ContactDevice.HomePhone.getClassificator() == contact.getContactCategory()) {
+                personDto.setPersonalPhone(contact.getValue());
 
             }
         }
