@@ -22,9 +22,7 @@ public enum ContactDevice {
     private final String nameEt;
 
     ContactDevice(int classificator, String nameEt) {
-
         this.classificator = classificator;
         this.nameEt = nameEt;
     }
-
 }

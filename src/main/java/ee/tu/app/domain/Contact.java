@@ -27,9 +27,10 @@ public class Contact {
     @Column(name = "ID_KV_LIIGID", length = 100, nullable = false)
     public int contactCategory;
 
+    // TODO CHECK TYPE
     // Kontaktivahendi väärtus (telefoni number, e-posti aadress jms)
     @Column(name = "TUNNUS1")
-    public Date residencePermitFrom;
+    public String value;
 
     // Rea viimase muutmise teinud arvuti IP aadress. Kui muutus tehti baasist, siis ip ja kasutajatunnus
     @Column(name = "URL", length = 50)
