@@ -1,8 +1,5 @@
 package ee.tu.app.service;
 
-import ee.tu.app.api.model.XRContactInfoUpdateRequest;
-import ee.tu.app.api.model.XRPerson;
-import ee.tu.app.api.model.XRPersonSearchRequest;
 import ee.tu.app.domain.Contact;
 import ee.tu.app.domain.Person;
 import ee.tu.app.enums.ContactDevice;
@@ -12,9 +9,12 @@ import ee.tu.app.service.dto.*;
 import ee.tu.app.service.interfaces.IPersonService;
 import ee.tu.app.service.todelete.BaseService;
 import jakarta.transaction.Transactional;
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static ee.tu.app.errors.Errors.ERROR_NOT_FOUND;
@@ -27,9 +27,11 @@ public class PersonService extends BaseService<Person> implements IPersonService
         super(repository);
     }
 
-    public PersonDto getPersonByUuid(String uuid) {
-       Person person =  ((PersonRepo) repository).findPersonByUuid(uuid)
-               .orElseThrow(() -> new TuAppServiceException(ERROR_NOT_FOUND.getCode(), String.format("No person with uuid {%s} found", uuid)));
+
+    @Override
+    public PersonDto getPersonByPersonUuid(String personUuid) {
+       Person person =  ((PersonRepo) repository).findPersonByUuid(personUuid)
+               .orElseThrow(() -> new TuAppServiceException(ERROR_NOT_FOUND.getCode(), String.format("No person with uuid {%s} found", personUuid)));
        PersonDto personDto = new PersonDto(){{
            setId(person.getId());
            setFirstName(person.getFirstName());
@@ -66,46 +68,73 @@ public class PersonService extends BaseService<Person> implements IPersonService
 
     @Override
     public UserAccountInfoDto getPersonAccountInfoByPersonUuid(String personUuid) {
-        return null;
+
+        UserAccountInfoDto userAccountInfoDto = new UserAccountInfoDto(){{
+
+        }};
+
+        throw new NotImplementedException();
+
     }
 
     @Override
     public ContactInfoDto getPersonContactsPersonUuid(String personUuid) {
-        return null;
+
+        Person person =  ((PersonRepo) repository).findPersonByUuid(personUuid)
+                .orElseThrow(() -> new TuAppServiceException(ERROR_NOT_FOUND.getCode(), String.format("No person with uuid {%s} found", personUuid)));
+        ContactInfoDto contactInfoDto = new ContactInfoDto(){{
+            // Todo make it to contact device
+//            setDevices(person.getPersonContactList());
+        }};
+
+        throw new NotImplementedException();
+
     }
 
     @Override
     public PersonDetailsDto getPersonDetailsByPersonUuid(String personUuid) {
-        return null;
+        PersonDetailsDto personDetailsDto = new PersonDetailsDto(){{
+
+        }};
+
+        throw new NotImplementedException();
+
     }
 
     @Override
     public List<EducationDto> getPersonEducationByUuid(String personUuid) {
-        return null;
+        List<EducationDto> educationDtoList = new ArrayList<>();
+
+        throw new NotImplementedException();
+
     }
 
-    @Override
-    public PersonDto getPersonByPersonUuid(String personUuid) {
-        return null;
-    }
 
     @Override
     public List<WorkRelationDto> getPersonWorkRelationsByPersonUuid(String personUuid) {
-        return null;
+        List<WorkRelationDto> workRelationDtoList = new ArrayList<>();
+
+        throw new NotImplementedException();
+
     }
 
     @Override
     public void savePersonDetailsBank(String personUuid, BankAccountDto BankAccountDto) {
 
+
+        throw new NotImplementedException();
     }
 
     @Override
     public List<PersonDto> getPersonsBySearchRequest(PersonSearchRequestDto PersonSearchRequestDto) {
-        return null;
+        List<PersonDto> personDtoList = new ArrayList<>();
+        throw new NotImplementedException();
+
     }
 
     @Override
     public void updatePersonContacts(String personUuid, ContactInfoUpdateRequestDto ContactInfoUpdateRequestDto) {
+        throw new NotImplementedException();
 
     }
 }
