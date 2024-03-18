@@ -85,7 +85,7 @@ public class PersonApi implements PersonApiDelegate {
     public ResponseEntity<XRPerson> getPersonInfo(String personUuid) {
         log.info("Get person account info is accessed");
         try {
-            PersonDto personDto = personService.getPersonByUuid(personUuid);
+            PersonDto personDto = personService.getPersonByPersonUuid(personUuid);
             return ResponseEntity.of(Optional.ofNullable(mapper.toXr(personDto)));
 
         } catch (TuAppServiceException e) {
