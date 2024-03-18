@@ -1,22 +1,73 @@
-type Query {
-    person: Person
+schema {
+    query: Query
 }
 
+scalar Translations
+scalar Classificator
+scalar Location
+scalar Country
+
+type Query {
+    # study_place_uuid is needed for fetching a person based on their study place uuid
+    persons(query: String, offset: Int, limit: Int, study_place_uuid: String): [Person]!
+}
 
 type Person {
-    id: Int!
-    name: String
-    lastName: String
-    fatherName: String
-    registryCode: String
-    maksuametCode: String
-    birthDate: String
-    sex: Int
-    someAlus: String
-    url: String
-    kid: Int
-    updatedAt: String
-    citizenship: Int
-    uuid: String
-    emplid: String
+    # id must NEVER be included. It's used internally and difficult to remove it if user doesn't have permissions for requesting it.
+
+    uuid(in:[String]): String
+    id: Int
+    first_name(name: String, is_exact: Boolean): String!
+    last_name(name: String, is_exact: Boolean): String!
+    full_name(in:[String]): String
+    personal_code(in: [String]): String
+    matricula_number: String
+    username(eq: String): String
+    is_learning(is_true: Boolean): Boolean
+    is_working(is_true: Boolean): Boolean
+    is_active(is_true: Boolean): Boolean
+    official_email: String
+    official_phone: String
+    official_mobile: String
+    official_units: [OfficialUnit]
+    study_places: [StudyPlace]
+    personal_phone: String
+    personal_email: String
+    addresses: [Address]
+    citizenship: Country
+}
+
+# at the moment all these study place fields are visible to all users who can fetch study_places info
+type StudyPlace {
+    uuid(in:[String]): String
+    id: Int
+    is_active(is_true: Boolean): Boolean
+    start_date: String
+    end_date: String
+    study_level(code: String): Classificator
+    study_type(code: String): Classificator
+    structural_unit: StructuralUnit
+    curriculum_uuid: String
+    curriculum_version_uuid: String
+}
+
+# no visibility restrictions by security
+type OfficialUnit {
+    job_title: Classificator
+    struct_unit_code: String
+    struct_unit_name: Translations
+}
+
+type StructuralUnit {
+    code: String
+    name: Translations
+}
+
+type Address {
+    country: Country
+    location: Location
+    address: String
+    postal_code: String
+    type(is:[Int]): Classificator
+    location_plain_text: String
 }
