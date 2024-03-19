@@ -6,8 +6,8 @@ import ee.tu.app.errors.TuAppServiceException;
 import ee.tu.app.service.PersonService;
 import ee.tu.app.service.dto.*;
 import ee.tu.app.web.rest.mapper.PersonXrMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +18,8 @@ import java.util.stream.Collectors;
 /*
  */
 @Component
-@Slf4j
 public class PersonApi implements PersonApiDelegate {
-
+    private final Logger log = LoggerFactory.getLogger(PersonApi.class);
     private final PersonService personService;
     private final PersonXrMapper mapper;
 

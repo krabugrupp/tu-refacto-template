@@ -2,7 +2,7 @@ package ee.tu.app.service;
 
 import ee.tu.app.domain.Contact;
 import ee.tu.app.domain.Person;
-import ee.tu.app.enums.ContactDevice;
+import ee.tu.app.consts.ContactDevice;
 import ee.tu.app.errors.TuAppServiceException;
 import ee.tu.app.repo.PersonRepo;
 import ee.tu.app.service.dto.*;
@@ -11,7 +11,6 @@ import ee.tu.app.service.todelete.BaseService;
 import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpServerErrorException;
 
 
 import java.util.ArrayList;
@@ -38,27 +37,23 @@ public class PersonService extends BaseService<Person> implements IPersonService
            setLastName(person.getLastName());
            setFullName(person.getFullName());
        }};
-
         for (Contact contact : person.getPersonContactList() ) {
-            if (ContactDevice.Email.getClassificator() == contact.getContactCategory()) {
-                personDto.setOfficialEmail(contact.getValue());
-
-            }
-            else if (ContactDevice.Fax.getClassificator() == contact.getContactCategory()) {
-                personDto.setOfficialFax(contact.getValue());
-
-            }
-            else if (ContactDevice.WorkMobilePhone.getClassificator() == contact.getContactCategory()) {
-                personDto.setOfficialMobile(contact.getValue());
-
-            }
-            else if (ContactDevice.MobilePhone.getClassificator() == contact.getContactCategory()) {
-                personDto.setPersonalPhone(contact.getValue());
-
-            }
-            else if (ContactDevice.HomePhone.getClassificator() == contact.getContactCategory()) {
-                personDto.setPersonalPhone(contact.getValue());
-
+            switch (contact.getContactCategory()) {
+                case ContactDevice.EmailClassificator:
+                    personDto.setOfficialEmail(contact.getValue());
+                    break;
+                case ContactDevice.FaxClassificator:
+                    personDto.setOfficialFax(contact.getValue());
+                    break;
+                case ContactDevice.WorkMobilePhoneClassificator:
+                    personDto.setOfficialMobile(contact.getValue());
+                    break;
+                case ContactDevice.WorkPhoneClassificator:
+                    personDto.setOfficialPhone(contact.getValue());
+                    break;
+                case ContactDevice.MobilePhoneClassificator:
+                    personDto.setPersonalPhone(contact.getValue());
+                    break;
             }
         }
 
