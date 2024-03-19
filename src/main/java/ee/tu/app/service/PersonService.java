@@ -30,7 +30,7 @@ public class PersonService extends BaseService<Person> implements IPersonService
     @Override
     public PersonDto getPersonByPersonUuid(String personUuid) {
        Person person =  ((PersonRepo) repository).findPersonByUuid(personUuid)
-               .orElseThrow(() -> new TuAppServiceException(ERROR_NOT_FOUND.getCode(), String.format("No person with uuid {%s} found", personUuid)));
+               .orElseThrow(() -> new TuAppServiceException(ERROR_NOT_FOUND, String.format("No person with uuid {%s} found", personUuid)));
        PersonDto personDto = new PersonDto(){{
            setId(person.getId());
            setFirstName(person.getFirstName());
@@ -76,7 +76,7 @@ public class PersonService extends BaseService<Person> implements IPersonService
     public ContactInfoDto getPersonContactsPersonUuid(String personUuid) {
 
         Person person =  ((PersonRepo) repository).findPersonByUuid(personUuid)
-                .orElseThrow(() -> new TuAppServiceException(ERROR_NOT_FOUND.getCode(), String.format("No person with uuid {%s} found", personUuid)));
+                .orElseThrow(() -> new TuAppServiceException(ERROR_NOT_FOUND, String.format("No person with uuid {%s} found", personUuid)));
         ContactInfoDto contactInfoDto = new ContactInfoDto(){{
             // Todo make it to contact device
 //            setDevices(person.getPersonContactList());
