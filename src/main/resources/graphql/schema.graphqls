@@ -2,10 +2,10 @@ schema {
     query: Query
 }
 
-scalar Translations
-scalar Classificator
-scalar Location
-scalar Country
+#scalar Translations
+#scalar Classificator
+#scalar Location
+#scalar Country
 
 type Query {
     # study_place_uuid is needed for fetching a person based on their study place uuid
@@ -34,7 +34,7 @@ type Person {
     personal_phone: String
     personal_email: String
     addresses: [Address]
-    citizenship: Country
+#    citizenship: Country
 }
 
 # at the moment all these study place fields are visible to all users who can fetch study_places info
@@ -44,8 +44,8 @@ type StudyPlace {
     is_active(is_true: Boolean): Boolean
     start_date: String
     end_date: String
-    study_level(code: String): Classificator
-    study_type(code: String): Classificator
+#    study_level(code: String): Classificator
+#    study_type(code: String): Classificator
     structural_unit: StructuralUnit
     curriculum_uuid: String
     curriculum_version_uuid: String
@@ -53,21 +53,21 @@ type StudyPlace {
 
 # no visibility restrictions by security
 type OfficialUnit {
-    job_title: Classificator
+#    job_title: Classificator
     struct_unit_code: String
-    struct_unit_name: Translations
+#    struct_unit_name: Translations
 }
 
 type StructuralUnit {
     code: String
-    name: Translations
+#    name: Translations
 }
 
 type Address {
-    country: Country
-    location: Location
+#    country: Country
+#    location: Location
     address: String
     postal_code: String
-    type(is:[Int]): Classificator
+#    type(is:[Int]): Classificator
     location_plain_text: String
 }

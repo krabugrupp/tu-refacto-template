@@ -4,10 +4,10 @@ package ee.tu.app.web.rest.mapper;
 import ee.tu.app.api.model.*;
 import ee.tu.app.service.dto.*;
 import org.mapstruct.Mapper;
-
+import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")
-public interface PersonXrMapper {
+public interface PersonApiXrMapper {
 
     XRPerson toXr(PersonDto element);
     XRUserAccountInfo toXr(UserAccountInfoDto userAccountInfoDto);

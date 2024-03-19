@@ -5,9 +5,10 @@ import ee.tu.app.api.model.*;
 import ee.tu.app.errors.TuAppServiceException;
 import ee.tu.app.service.PersonService;
 import ee.tu.app.service.dto.*;
-import ee.tu.app.web.rest.mapper.PersonXrMapper;
+import ee.tu.app.web.rest.mapper.PersonApiXrMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -21,9 +22,9 @@ import java.util.stream.Collectors;
 public class PersonApi implements PersonApiDelegate {
     private final Logger log = LoggerFactory.getLogger(PersonApi.class);
     private final PersonService personService;
-    private final PersonXrMapper mapper;
+    private final PersonApiXrMapper mapper;
 
-    public PersonApi(PersonService personService, PersonXrMapper mapper) {
+    public PersonApi(PersonService personService,PersonApiXrMapper mapper) {
         this.personService = personService;
         this.mapper = mapper;
     }
